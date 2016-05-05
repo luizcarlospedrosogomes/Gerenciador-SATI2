@@ -13,3 +13,6 @@ ALTER TABLE evento
 ADD CONSTRAINT evento_tipo_fk FOREIGN KEY (tipo)
 REFERENCES tipo_evento(id);
 */
+--insert into tipo_evento (descricao) values('outros');
+--, 'minicursos', 'mesa redonda', 'oficina', 'outros'
+select * from tipo_evento 

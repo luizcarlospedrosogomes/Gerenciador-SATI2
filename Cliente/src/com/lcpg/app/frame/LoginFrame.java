@@ -21,7 +21,7 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    private class ListenerSocket implements  Runnable{
+    public class ListenerSocket implements  Runnable{
         private ObjectInputStream input;
         private ObjectOutputStream output;
         
