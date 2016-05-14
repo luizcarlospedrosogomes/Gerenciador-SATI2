@@ -2,13 +2,13 @@ package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ClienteService;
 import com.lcpg.app.Service.ListenerSocket;
-import com.lcpg.app.bean.ChatMessage;
+import com.lcpg.app.bean.Mensagem;
 import java.net.Socket;
 import javax.swing.JOptionPane;
 
 public class LoginFrame extends javax.swing.JFrame {
      private Socket socket;
-    private ChatMessage message;
+    private Mensagem message;
     private ClienteService service;
     
     public LoginFrame() {
@@ -159,16 +159,13 @@ public class LoginFrame extends javax.swing.JFrame {
     private void jButtonConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConectarActionPerformed
         String usuario = jTextFieldUsario.getText();
         String senha   = jTextFieldSenha.getText();
-        int    porta   = Integer.valueOf(jTextFieldPorta.getText());
-        if(!usuario.isEmpty() && !senha.isEmpty() && !jTextFieldPorta.getText().isEmpty() && !jTextFieldIPServidor.getText().isEmpty()){
+        if(!usuario.isEmpty() && !senha.isEmpty()){
             ListenerSocket listener = new ListenerSocket();
             listener.setUsuario(usuario);
             listener.setSenha(senha);
-            listener.setiP(jTextFieldIPServidor.getText());
-            listener.setPorta(porta);
             listener.conectaServidor();
             }else{
-                JOptionPane.showMessageDialog(this, "Insira Usuario, Senha, IP servidor e porta."); 
+                JOptionPane.showMessageDialog(this, "Insira Usuario, Senha"); 
         }
     }//GEN-LAST:event_jButtonConectarActionPerformed
 

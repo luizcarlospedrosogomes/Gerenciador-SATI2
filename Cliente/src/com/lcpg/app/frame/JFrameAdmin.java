@@ -1,7 +1,7 @@
 package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ClienteService;
-import com.lcpg.app.bean.ChatMessage;
+import com.lcpg.app.bean.Mensagem;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;

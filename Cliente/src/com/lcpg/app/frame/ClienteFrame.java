@@ -2,8 +2,8 @@
 package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ClienteService;
-import com.lcpg.app.bean.ChatMessage;
-import com.lcpg.app.bean.ChatMessage.Action;
+import com.lcpg.app.bean.Mensagem;
+import com.lcpg.app.bean.Mensagem.Action;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 public class ClienteFrame extends javax.swing.JFrame {
     private Socket socket;
-    private ChatMessage message;
+    private Mensagem message;
     private ClienteService service;
     
     public ClienteFrame() {
@@ -36,21 +36,21 @@ public class ClienteFrame extends javax.swing.JFrame {
         }
         @Override
         public void run(){
-            ChatMessage message = null;
+            Mensagem message = null;
             try {
-                while((message = (ChatMessage) input.readObject()) != null){
+                while((message = (Mensagem) input.readObject()) != null){
                     Action action  = message.getAction();
                     
-                    if(action.equals(ChatMessage.Action.CONNECT)){
+                    if(action.equals(Mensagem.Action.CONNECT)){
                         connected(message);
-                    }else if(action.equals(ChatMessage.Action.DISCONNECT)){
+                    }else if(action.equals(Mensagem.Action.DISCONNECT)){
                         disconnect();
                         socket.close();
-                    }else if(action.equals(ChatMessage.Action.SEND_ONE)){
+                    }else if(action.equals(Mensagem.Action.SEND_ONE)){
                         receive(message);
-                    }else if(action.equals(ChatMessage.Action.SEND_ALL)){
+                    }else if(action.equals(Mensagem.Action.SEND_ALL)){
                         
-                    }else if(action.equals(ChatMessage.Action.USERS_ONLINE)){
+                    }else if(action.equals(Mensagem.Action.USERS_ONLINE)){
                          refreshOnline(message);
                     }
                 }
@@ -62,7 +62,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         }
     }
     
-    private void connected(ChatMessage message){
+    private void connected(Mensagem message){
         if(message.getTexto().equals("NO")){
             this.jTextFieldNome.setText("");
             JOptionPane.showMessageDialog(this, "Cliente ja conectado, utilize outro nome ou tente mais tarde");
@@ -90,10 +90,10 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.jButtonAtualizar.setEnabled(status);
         this.jButtonEnviar.setEnabled(status); 
     }
-    private void refreshOnline(ChatMessage message){
+    private void refreshOnline(Mensagem message){
     
     }
-    private void receive(ChatMessage message){
+    private void receive(Mensagem message){
         this.jTextAreaReceptor.append(message.getNome() +" diz: "+ message.getTexto()+"\n"); 
     }
     
@@ -297,7 +297,7 @@ public class ClienteFrame extends javax.swing.JFrame {
     private void jButtonConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConectarActionPerformed
         String nome = this.jTextFieldNome.getText();
         if(!nome.isEmpty()){
-            this.message = new ChatMessage();
+            this.message = new Mensagem();
             this.message.setAction(Action.CONNECT);
             this.message.setNome(nome);
           //  this.service = new ClienteService();

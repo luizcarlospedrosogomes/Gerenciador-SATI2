@@ -160,10 +160,19 @@
         <Component class="javax.swing.JTextField" name="jTextFieldNome">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldHoraIni">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="00:00"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldData1">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldHoraFim">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="00:00"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldHoraFimActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxTipo">
           <Properties>
@@ -184,6 +193,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadastrarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonCancelar1">
           <Properties>

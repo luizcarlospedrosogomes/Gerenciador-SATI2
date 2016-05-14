@@ -66,6 +66,11 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
         jButtonExcluir.setText("Excluir");
 
         jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,6 +138,12 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        JFrameCadastroEventoAdicionar jFrameCadastroEventoAdicionar = new JFrameCadastroEventoAdicionar();
+        jFrameCadastroEventoAdicionar.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     /**
      * @param args the command line arguments

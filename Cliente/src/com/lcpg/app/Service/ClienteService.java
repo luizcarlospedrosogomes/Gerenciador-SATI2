@@ -1,6 +1,6 @@
 package com.lcpg.app.Service;
 
-import com.lcpg.app.bean.ChatMessage;
+import com.lcpg.app.bean.Mensagem;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -31,7 +31,7 @@ public class ClienteService {
         return socket;
     }
     
-    public void send(ChatMessage message){
+    public void send(Mensagem message){
         try {
           output.writeObject(message);
         } catch (IOException ex) {
