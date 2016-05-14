@@ -1,4 +1,3 @@
-
 package com.lcpg.app.banco;
 
 import java.sql.Connection;
@@ -9,31 +8,34 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Usuario {
+/**
+ *
+ * @author usuario
+ */
+public class Evento {
     private Conexao   conectar;
     private Statement stm;
     private ResultSet result;
     private PreparedStatement pst;
     private Connection con;
    
-    public Usuario(){
+    public Evento(){
      this.conectar = new Conexao();
      this.con      = this.conectar.conectar();
+    
     }
-   public ResultSet consultaLogin(String nome, String senha){
-       String sql = "select id, nome, senha from usuario where nome = ? and senha = ? limit 1" ;
-       System.out.println("nome "+nome +" senha "+senha);
+   
+//   /public ResultSet co select id, descricao from tipo_evento
+    
+    public ResultSet consultaTipoEvento(){
+       String sql = "select id, descricao from tipo_evento" ;
+      
        try {
             this.pst = con.prepareStatement(sql);
-            pst.setString(1, nome);
-            pst.setString(2, senha);
-            System.out.println(sql);
             this.result = this.pst.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return this.result;
    }
-    
-    
 }

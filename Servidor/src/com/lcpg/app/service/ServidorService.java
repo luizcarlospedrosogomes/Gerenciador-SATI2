@@ -6,8 +6,8 @@
 package com.lcpg.app.service;
 
 import com.lcpg.app.banco.Usuario;
-import com.lcpg.app.bean.ChatMessage;
-import com.lcpg.app.bean.ChatMessage.Action;
+import com.lcpg.app.bean.Mensagem;
+import com.lcpg.app.bean.Mensagem.Action;
 import com.sun.xml.internal.ws.client.SenderException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -61,9 +61,9 @@ public class ServidorService {
         
         @Override
         public void run(){
-             ChatMessage message = null;
+             Mensagem message = null;
             try {
-                while((message = (ChatMessage) input.readObject()) != null){
+                while((message = (Mensagem) input.readObject()) != null){
                 Action action = message.getAction();
                 
                 if(action.equals(Action.CONNECT)){
@@ -85,15 +85,18 @@ public class ServidorService {
         }
     }
     
-    private void conect(ChatMessage message, ObjectOutputStream output){
+    private void conect(Mensagem message, ObjectOutputStream output){
         Usuario usuario = new Usuario();
         this.res = usuario.consultaLogin(message.getNome(), message.getSenha());
         try {
             if(res.next()){
-                if(message.getNome().equals("admin") && message.getSenha().equals("admin"))
+                if(message.getNome().equals("admin") && message.getSenha().equals("admin")){
                     message.setTexto("200_1");
-                else
+                    message.setIdUsuario(res.getInt(1));
+                }else{
                     message.setTexto("200");
+                    message.setIdUsuario(res.getInt(1));
+                }
             }else
                     message.setTexto("403");
         } catch (SQLException ex) {
@@ -102,7 +105,7 @@ public class ServidorService {
         sendOne(message, output);
     }
     
-    private void disconnect(ChatMessage message, ObjectOutputStream output){
+    private void disconnect(Mensagem message, ObjectOutputStream output){
         mapOnlines.remove(message.getNome());
         message.setTexto("bye");
         message.setAction(Action.SEND_ONE);
@@ -111,7 +114,7 @@ public class ServidorService {
         
     }
     
-    private void sendAll(ChatMessage message, ObjectOutputStream output){
+    private void sendAll(Mensagem message, ObjectOutputStream output){
         for(Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()){
             if(!kv.getKey().equals(message.getNome())){
                 try {
@@ -122,7 +125,7 @@ public class ServidorService {
             }
         }
     }
-    private void sendOne(ChatMessage message, ObjectOutputStream output){
+    private void sendOne(Mensagem message, ObjectOutputStream output){
         try {
             output.writeObject(message);
         } catch (IOException ex) {
