@@ -34,7 +34,7 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="74" max="32767" attributes="0"/>
+              <EmptySpace pref="131" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,8 +79,8 @@
                           <EmptySpace pref="60" max="32767" attributes="0"/>
                           <Component id="jButtonConectar" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jTextFieldSenha" max="32767" attributes="0"/>
                       <Component id="jTextFieldUsario" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTextFieldSenha" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -101,8 +101,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextFieldSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -124,11 +124,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="jTextFieldUsario">
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldSenha">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldSenhaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -177,6 +172,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldPorta">
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="jTextFieldSenha">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldSenhaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

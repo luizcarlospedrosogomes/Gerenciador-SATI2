@@ -1,7 +1,7 @@
 package com.lcpg.app;
 import com.lcpg.app.frame.LoginFrame;
 
-public class ClienteChat {
+public class Cliente {
 
       public static void main(String args[]) {
         /* Set the Nimbus look and feel */

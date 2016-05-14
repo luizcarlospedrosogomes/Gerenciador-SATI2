@@ -8,20 +8,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JFrameAdmin extends javax.swing.JFrame {
-    private ChatMessage     message = null;
-    private ClienteService service;
-    private Socket         socket;
+
     
      public JFrameAdmin() {
         initComponents();
+         System.out.println("em JFrameAdmin ");
     }
-    public JFrameAdmin(ChatMessage message, Socket socket) {
-        this.message = message;
-        this.socket  = socket;
-         initComponents();
-    }
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -109,14 +101,7 @@ public class JFrameAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.message.setAction(ChatMessage.Action.DISCONNECT);
-       // this.service.send(message);
-        try {
-            socket.close();
-        } catch (IOException ex) {
-            Logger.getLogger(JFrameAdmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        super.dispose();
+  
     }//GEN-LAST:event_jButtonSairActionPerformed
 
      
