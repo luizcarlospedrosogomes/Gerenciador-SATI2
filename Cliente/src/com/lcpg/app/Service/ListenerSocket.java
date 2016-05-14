@@ -42,7 +42,7 @@ public class ListenerSocket{
         public Properties  getIPPorta(){
             this.prop = new Properties();
             try {
-                this.file = new FileInputStream("./properties/conexao");
+                this.file = new FileInputStream("./src/properties/dados.properties"); 
                 this.prop.load(this.file);
                 setiP(prop.getProperty("prop.server.host"));
 		setPorta(Integer.parseInt(prop.getProperty("prop.server.porta")));
@@ -200,13 +200,5 @@ public class ListenerSocket{
         this.porta = porta;
     }
 }
-class Manipulador {
-    public static Properties getProp() throws IOException {
-		Properties props = new Properties();
-		FileInputStream file = new FileInputStream("conexao.properties");
-		props.load(file);
-		return props;
 
-   }
-}
 
