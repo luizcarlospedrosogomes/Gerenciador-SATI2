@@ -5,6 +5,7 @@
  */
 package com.lcpg.app.service;
 
+import com.lcpg.app.banco.Evento;
 import com.lcpg.app.banco.Usuario;
 import com.lcpg.app.bean.Mensagem;
 import com.lcpg.app.bean.Mensagem.Action;
@@ -71,7 +72,8 @@ public class ServidorService {
                 }else if(action.equals(Action.DISCONNECT)){
                     disconnect(message, output);
                     return;
-                }else if(action.equals(Action.SEND_ONE)){
+                }else if(action.equals(Action.TIPO_EVENTO)){
+                    tipoEvento(message, output);
                 }else if(action.equals(Action.SEND_ALL)){
                     
                 }else if(action.equals(Action.USERS_ONLINE)){
@@ -104,6 +106,13 @@ public class ServidorService {
         }
         sendOne(message, output);
     }
+    
+    private void tipoEvento(Mensagem message, ObjectOutputStream output){
+        message.setAction(Action.TIPO_EVENTO);
+        Evento evento = new Evento();
+        message.setResult(evento.consultaTipoEvento());
+    }
+    
     
     private void disconnect(Mensagem message, ObjectOutputStream output){
         mapOnlines.remove(message.getNome());

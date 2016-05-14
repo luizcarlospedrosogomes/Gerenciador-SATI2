@@ -1,4 +1,5 @@
 package com.lcpg.app.bean;
+import java.awt.List;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ public class Mensagem implements Serializable{
     private ResultSet result;
     
     private Set<String> setOnline = new HashSet<String>();
+    //List<String> suaColecao;
     private Action action;
 
     public String getNome() {

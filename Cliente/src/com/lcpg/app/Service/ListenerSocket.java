@@ -29,40 +29,21 @@ public class ListenerSocket{
         private ClienteService service;
         private String usuario;
         private String senha;
-        private String resLogin;
-        private String iP;
-        private int porta;
-        private Properties prop;
-        private FileInputStream file;
+
+        private GetConexao conexao;
        
         public ListenerSocket(){
-            getIPPorta();
+           this.conexao = new  GetConexao();                   
         }
-        
-        public Properties  getIPPorta(){
-            this.prop = new Properties();
-            try {
-                this.file = new FileInputStream("./src/properties/dados.properties"); 
-                this.prop.load(this.file);
-                setiP(prop.getProperty("prop.server.host"));
-		setPorta(Integer.parseInt(prop.getProperty("prop.server.porta")));
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ListenerSocket.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(ListenerSocket.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         
-            return prop;
-        }
-        
+ 
         
         public void conectaServidor(){
             this.message = new Mensagem();
             this.message.setAction(Action.CONNECT);
             this.message.setNome(getUsuario());
             this.message.setSenha(getSenha());
-            System.out.println("conectando no IP: "+getiP()+":"+getPorta());
-            this.service = new ClienteService(getiP(), getPorta());
+            System.out.println("conectando no IP: "+this.conexao.getIP()+":"+this.conexao.getPorta());
+            this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
             this.socket = this.service.connect();
             this.service.send(message);
             respostaServidor(this.socket);
@@ -71,7 +52,7 @@ public class ListenerSocket{
         public void tipoEnvento(){
             this.message = new Mensagem();
             this.message.setAction(Action.TIPO_EVENTO);
-            this.service = new ClienteService(getiP(), getPorta());
+            this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
             this.socket = this.service.connect();
             this.service.send(message);
             respostaServidor(this.socket);
@@ -102,7 +83,10 @@ public class ListenerSocket{
                 Logger.getLogger(ListenerSocket.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-       
+        
+        private void resTipoEvento(Mensagem message){
+            System.out.println(message.getResult());
+        }
   
         public void respostaServidor(Socket socket){
             
@@ -113,16 +97,16 @@ public class ListenerSocket{
             }
             Mensagem message = null;
             try {
-               // while((message = (ChatMessage) input.readObject()) != null){
-                    message = (Mensagem) input.readObject();
-                    Action action = message.getAction();
-                    if(action.equals(Mensagem.Action.CONNECT)){
-                        conectar(message);                   
-                    }else if(action.equals(Mensagem.Action.DISCONNECT)){
-                       // disconnect();
-                        socket.close();
-                    }
-                //}
+                message = (Mensagem) input.readObject();
+                Action action = message.getAction();
+                if (action.equals(Mensagem.Action.CONNECT)) {
+                    conectar(message);
+                } else if (action.equals(Mensagem.Action.DISCONNECT)) {
+                    // disconnect();
+                    socket.close();
+                } else if (action.equals(Mensagem.Action.TIPO_EVENTO)) {
+                    resTipoEvento(message);
+                }
             } catch (IOException ex) {
                   System.out.println("erro "+ ex);
             } catch (ClassNotFoundException ex) {
@@ -158,47 +142,4 @@ public class ListenerSocket{
         this.senha = senha;
     }
 
-    /**
-     * @return the resLogin
-     */
-    public String getResLogin() {
-        return resLogin;
-    }
-
-    /**
-     * @param resLogin the resLogin to set
-     */
-    public void setResLogin(String resLogin) {
-        this.resLogin = resLogin;
-    }
-
-    /**
-     * @return the iP
-     */
-    public String getiP() {
-        return iP;
-    }
-
-    /**
-     * @param iP the iP to set
-     */
-    public void setiP(String iP) {
-        this.iP = iP;
-    }
-
-    /**
-     * @return the porta
-     */
-    public int getPorta() {
-        return porta;
-    }
-
-    /**
-     * @param porta the porta to set
-     */
-    public void setPorta(int porta) {
-        this.porta = porta;
-    }
 }
-
-

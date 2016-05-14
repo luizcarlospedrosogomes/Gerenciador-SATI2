@@ -12,6 +12,7 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
     public JFrameCadastroEventoAdicionar() {
         initComponents();
         this.listener = new ListenerSocket();
+        this.listener.tipoEnvento();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
