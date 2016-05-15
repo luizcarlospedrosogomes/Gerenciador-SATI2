@@ -5,11 +5,16 @@
         <group>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/Service/ClienteService.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/Service/ListenerSocket.java</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/bean/Mensagem.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/Cliente.java</file>
-            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/bean/ChatMessage.java</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/properties/dados.properties</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/Service/GetConexao.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/frame/JFramePrincipal.java</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/frame/JFrameCadastroEventoAdicionar.java</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/frame/ClienteFrame.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/frame/LoginFrame.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/frame/JFrameAdmin.java</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Cliente/src/com/lcpg/app/frame/JFrameCadastroEvento.java</file>
         </group>
     </open-files>
 </project-private>

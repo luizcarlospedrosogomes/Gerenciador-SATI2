@@ -9,14 +9,15 @@ import com.lcpg.app.bean.Mensagem;
 import com.lcpg.app.bean.Mensagem.Action;
 import com.lcpg.app.frame.JFrameAdmin;
 import com.lcpg.app.frame.JFrameCadastroEvento;
+import com.lcpg.app.frame.JFrameCadastroEventoAdicionar;
 import com.lcpg.app.frame.LoginFrame;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Properties;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -49,13 +50,14 @@ public class ListenerSocket{
             respostaServidor(this.socket);
         }
         
-        public void tipoEnvento(){
+        public void  tipoEnvento(){
             this.message = new Mensagem();
             this.message.setAction(Action.TIPO_EVENTO);
             this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
             this.socket = this.service.connect();
-            this.service.send(message);
+            this.service.send(this.message);
             respostaServidor(this.socket);
+            System.out.println("respota servidor");
         }
         
         private void conectar(Mensagem message){
@@ -84,11 +86,16 @@ public class ListenerSocket{
             }
         }
         
-        private void resTipoEvento(Mensagem message){
-            System.out.println(message.getResult());
+        public  void resTipoEvento(Mensagem message){
+            System.out.println(message.getTipoEventoList().values());
+            System.out.println(message.getTipoEventoList().keySet());
+            JFrameCadastroEventoAdicionar jFrameCadastroEventoAdicionar = new JFrameCadastroEventoAdicionar();
+            jFrameCadastroEventoAdicionar.preencherComboBox(message.getTipoEventoList());
+            jFrameCadastroEventoAdicionar.setVisible(true);
+            //return message.getTipoEventoList();
         }
-  
-        public void respostaServidor(Socket socket){
+
+        private void respostaServidor(Socket socket){
             
             try {
                 this.input = new ObjectInputStream(socket.getInputStream());

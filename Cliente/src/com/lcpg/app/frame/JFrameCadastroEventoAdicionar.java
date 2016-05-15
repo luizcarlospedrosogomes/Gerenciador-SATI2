@@ -3,16 +3,58 @@ package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ListenerSocket;
 import com.lcpg.app.bean.Mensagem;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
 
+class ComboItem
+{
+    private String key;
+    private String value;
+
+    public ComboItem(String key, String value)
+    {
+        this.key = key;
+        this.value = value;
+    }
+
+    @Override
+    public String toString()
+    {
+        return key;
+    }
+
+    public String getKey()
+    {
+        return key;
+    }
+
+    public String getValue()
+    {
+        return value;
+    }
+}
 
 public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
-    Mensagem mensagem;
-    private ListenerSocket listener;
+    //private ListenerSocket listener;
+    //private HashMap<Integer, String> tipoEventoList;
+   
     
     public JFrameCadastroEventoAdicionar() {
         initComponents();
-        this.listener = new ListenerSocket();
-        this.listener.tipoEnvento();
+        }
+    
+     public void preencherComboBox(HashMap<String, String> tipoEventoList){
+         System.out.println("retornado valor em frame adicioanr");
+         System.out.println(tipoEventoList.values());
+         System.out.println(tipoEventoList.keySet());
+         Iterator it = tipoEventoList.keySet().iterator();        
+         while(it.hasNext())
+        {
+            jComboBoxTipo.addItem(tipoEventoList.get(it.next()));
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -55,8 +97,6 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
                 jTextFieldHoraFimActionPerformed(evt);
             }
         });
-
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButtonCadastrar.setText("Cadastrar");
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +191,7 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
        if(!jTextFieldNome.getText().isEmpty() && !jTextFieldData1.getText().isEmpty()){
            
