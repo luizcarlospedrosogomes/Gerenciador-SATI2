@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.lcpg.app.bean;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +22,7 @@ public class Mensagem implements Serializable{
     private String horaFimEvento;
     private int    tipoEvento;
     private int    idUsuario;
-    private ResultSet result;
+    private HashMap<String, String> tipoEventoList = new HashMap<String, String>();
 
     /**
      * @return the nome
@@ -198,19 +193,18 @@ public class Mensagem implements Serializable{
     }
 
     /**
-     * @return the result
+     * @return the tipoEventoList
      */
-    public ResultSet getResult() {
-        return result;
+    public HashMap<String, String> getTipoEventoList() {
+        return tipoEventoList;
     }
 
     /**
-     * @param result the result to set
+     * @param tipoEventoList the tipoEventoList to set
      */
-    public void setResult(ResultSet result) {
-        this.result = result;
+    public void setTipoEventoList(HashMap<String, String> tipoEventoList) {
+        this.tipoEventoList = tipoEventoList;
     }
-    
     public enum Action{
         CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO
     }

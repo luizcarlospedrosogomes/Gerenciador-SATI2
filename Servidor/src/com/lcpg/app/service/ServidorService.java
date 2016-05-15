@@ -18,9 +18,12 @@ import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
@@ -110,7 +113,19 @@ public class ServidorService {
     private void tipoEvento(Mensagem message, ObjectOutputStream output){
         message.setAction(Action.TIPO_EVENTO);
         Evento evento = new Evento();
-        message.setResult(evento.consultaTipoEvento());
+        HashMap<String, String> hmap= new HashMap<String, String>();
+        this.res = evento.consultaTipoEvento();
+        try {
+            while(this.res.next()) {
+                System.out.println(res.getInt(1)+" - "+res.getString(2));
+                hmap.put(res.getString(1), res.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        message.setTipoEventoList(hmap);
+        sendOne(message, output);
+       
     }
     
     
@@ -118,11 +133,13 @@ public class ServidorService {
         mapOnlines.remove(message.getNome());
         message.setTexto("bye");
         message.setAction(Action.SEND_ONE);
-        sendAll(message, output);
+  //      sendAll(message, output);
         System.out.println("cliente "+ message.getNome()+" deixou a sala");
         
     }
     
+
+  /*  
     private void sendAll(Mensagem message, ObjectOutputStream output){
         for(Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()){
             if(!kv.getKey().equals(message.getNome())){
@@ -134,6 +151,7 @@ public class ServidorService {
             }
         }
     }
+*/
     private void sendOne(Mensagem message, ObjectOutputStream output){
         try {
             output.writeObject(message);
