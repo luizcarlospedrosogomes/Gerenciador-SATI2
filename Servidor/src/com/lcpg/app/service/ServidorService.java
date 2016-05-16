@@ -9,16 +9,16 @@ import com.lcpg.app.banco.Evento;
 import com.lcpg.app.banco.Usuario;
 import com.lcpg.app.bean.Mensagem;
 import com.lcpg.app.bean.Mensagem.Action;
-import com.sun.xml.internal.ws.client.SenderException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  *
  * @author usuario
  */
-public class ServidorService {
+    public class ServidorService {
     
     private ServerSocket serverSocket;
     private Socket       socket;
@@ -77,11 +77,16 @@ public class ServidorService {
                     return;
                 }else if(action.equals(Action.TIPO_EVENTO)){
                     tipoEvento(message, output);
-                }else if(action.equals(Action.SEND_ALL)){
-                    
+                }else if(action.equals(Action.CADASTRO_EVENTO)){
+                    cadastroEvento(message, output);
+                }else if(action.equals(Action.EVENTO_LIST)){
+                    eventoList(message, output);
+                }else if(action.equals(Action.EXCLUIR_EVENTO)){
+                    excluirEvento(message, output);
                 }else if(action.equals(Action.USERS_ONLINE)){
                     
-                }}
+                }
+             }  
             } catch (IOException ex) {
                 disconnect(message, output);
             } catch (ClassNotFoundException ex) {
@@ -128,11 +133,50 @@ public class ServidorService {
        
     }
     
+    private void cadastroEvento(Mensagem message, ObjectOutputStream output){
+        Evento evento = new Evento();
+        evento.inserirEvento(message.getNomeEvento(), message.getHoraInicioEvento(), message.getHoraFimEvento(), message.getTipoEvento(), message.getIdUsuario(), message.getDataEvento());
+        sendOne(message, output);
+    }
+    
+    private void excluirEvento(Mensagem message, ObjectOutputStream output){
+        Evento  evento = new Evento();
+        if(evento.excluirEvento(message.getIdEvento())){
+            message.setResposta("200");
+        }else{
+            message.setResposta("501");
+        }
+        
+        sendOne(message, output);
+    }
+    
+    private void eventoList(Mensagem message, ObjectOutputStream output){
+        Evento evento = new Evento();
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        this.res = evento.eventoList(message.getIdUsuario());
+        try {
+        ResultSetMetaData meta = this.res.getMetaData();
+        while (this.res.next()) {
+            Map map = new HashMap();
+            for (int i = 1; i <= meta.getColumnCount(); i++) {
+                String key = meta.getColumnName(i);
+                String value = res.getString(key);
+                map.put(key, value);
+            }
+            list.add(map);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        message.setListEvento(list);
+        sendOne(message, output);
+    }
     
     private void disconnect(Mensagem message, ObjectOutputStream output){
-        mapOnlines.remove(message.getNome());
-        message.setTexto("bye");
-        message.setAction(Action.SEND_ONE);
+//        mapOnlines.remove(message.getNome());
+     //   message.setTexto("bye");
+       // message.setAction(Action.SEND_ONE);
   //      sendAll(message, output);
         System.out.println("cliente "+ message.getNome()+" deixou a sala");
         
