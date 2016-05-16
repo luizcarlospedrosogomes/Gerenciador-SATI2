@@ -25,3 +25,10 @@ add constraint evento_pkey primary key(id);
 alter table evento
 add constraint evento_tipo_evento_fk foreign key (tipo_evento_id) 
 references tipo_evento(id);
+alter table evento add column usuario_id integer
+alter table evento
+add constraint usuario_evento_id_fkey foreign key (usuario_id)
+references usuario(id)
+insert into tipo_evento(descricao) values('Palestra')
+select id, descricao from tipo_evento
+select * from usuario
