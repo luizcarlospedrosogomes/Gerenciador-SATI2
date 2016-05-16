@@ -151,8 +151,9 @@ public class LoginFrame extends javax.swing.JFrame {
             listener.setUsuario(usuario);
             listener.setSenha(senha);
             listener.conectaServidor();
-            }else{
-                JOptionPane.showMessageDialog(this, "Insira Usuario, Senha"); 
+           // listener.res;
+        }else{
+            JOptionPane.showMessageDialog(this, "Insira Usuario, Senha"); 
         }
     }//GEN-LAST:event_jButtonConectarActionPerformed
 

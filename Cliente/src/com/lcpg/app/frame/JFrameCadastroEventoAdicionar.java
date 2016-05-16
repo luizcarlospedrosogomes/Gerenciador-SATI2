@@ -2,40 +2,8 @@
 package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ListenerSocket;
-import com.lcpg.app.bean.Mensagem;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.Set;
-
-class ComboItem
-{
-    private String key;
-    private String value;
-
-    public ComboItem(String key, String value)
-    {
-        this.key = key;
-        this.value = value;
-    }
-
-    @Override
-    public String toString()
-    {
-        return key;
-    }
-
-    public String getKey()
-    {
-        return key;
-    }
-
-    public String getValue()
-    {
-        return value;
-    }
-}
 
 public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
     //private ListenerSocket listener;
@@ -193,8 +161,10 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
  
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-       if(!jTextFieldNome.getText().isEmpty() && !jTextFieldData1.getText().isEmpty()){
-           
+        int idTipoEvento = jComboBoxTipo.getSelectedIndex();
+        if(!jTextFieldNome.getText().isEmpty() && !jTextFieldData1.getText().isEmpty()){
+           ListenerSocket listener = new ListenerSocket();
+           listener.cadastroEvento(jTextFieldNome.getText(), jTextFieldHoraIni.getText(), jTextFieldHoraFim.getText() ,idTipoEvento +1, jTextFieldData1.getText());
        
        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed

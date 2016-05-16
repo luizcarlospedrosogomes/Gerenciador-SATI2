@@ -1,7 +1,10 @@
 package com.lcpg.app.bean;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Mensagem implements Serializable{
@@ -14,10 +17,13 @@ public class Mensagem implements Serializable{
     private String horaInicioEvento;
     private String horaFimEvento;
     private int    tipoEvento;
+    private String idEvento;
+    private String resposta;
     private int    idUsuario;
     private HashMap<String, String> tipoEventoList = new HashMap<String, String>();
-    
+    private List<Map<String, String>> listEvento = new ArrayList<Map<String, String>>();
     private Set<String> setOnline = new HashSet<String>();
+
     //List<String> suaColecao;
     private Action action;
 
@@ -197,8 +203,50 @@ public class Mensagem implements Serializable{
         this.tipoEventoList = tipoEventoList;
     }
 
+       /**
+     * @return the listEvento
+     */
+    public List<Map<String, String>> getListEvento() {
+        return listEvento;
+    }
+
+    /**
+     * @param listEvento the listEvento to set
+     */
+    public void setListEvento(List<Map<String, String>> listEvento) {
+        this.listEvento = listEvento;
+    }
+
+    /**
+     * @return the idEvento
+     */
+    public String getIdEvento() {
+        return idEvento;
+    }
+
+    /**
+     * @param idEvento the idEvento to set
+     */
+    public void setIdEvento(String idEvento) {
+        this.idEvento = idEvento;
+    }
+
+    /**
+     * @return the resposta
+     */
+    public String getResposta() {
+        return resposta;
+    }
+
+    /**
+     * @param resposta the resposta to set
+     */
+    public void setResposta(String resposta) {
+        this.resposta = resposta;
+    }
+
     public enum Action{
-        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO
+        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO, EVENTO_LIST, EXCLUIR_EVENTO
     }
             
 }
