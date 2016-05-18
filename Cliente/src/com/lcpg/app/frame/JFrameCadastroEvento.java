@@ -36,15 +36,17 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
         Object[] row = new Object[6];
         for (Map<String, String> map : this.listener.listEvento) {
             Object [] dados = map.values().toArray();
-                row[0] = dados[5];
-                row[1] = dados[3];
-                row[2] = dados[1];
-                row[3] = dados[2];
-                row[4] = dados[0];
-                row[5] = dados[4];
-                model.addRow(row);
-        }        
-    }
+            row[0] = dados[5];
+            row[1] = dados[3];
+            row[2] = dados[1];
+            row[3] = dados[2];
+            row[4] = dados[0];
+            row[5] = dados[4];
+            model.addRow(row);
+            
+       }
+        }
+    
     
     
     @SuppressWarnings("unchecked")
@@ -60,6 +62,7 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButtonAdicionar = new javax.swing.JButton();
         jButtonAtualizar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +80,7 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,10 +100,17 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
             }
         });
 
-        jButtonAtualizar.setText("Adicionar");
+        jButtonAtualizar.setText("Atualizar");
         jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAtualizarActionPerformed(evt);
+            }
+        });
+
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
             }
         });
 
@@ -109,7 +119,9 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 475, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jButtonSair)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAtualizar)
                 .addGap(29, 29, 29)
                 .addComponent(jButtonAdicionar)
@@ -121,7 +133,8 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAdicionar)
-                    .addComponent(jButtonAtualizar))
+                    .addComponent(jButtonAtualizar)
+                    .addComponent(jButtonSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -140,9 +153,7 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
                         .addGap(311, 311, 311)
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,8 +216,15 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableListarEventosMouseClicked
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        // TODO add your handling code here:
+       // DefaultTableModel dm = (DefaultTableModel)jTableListarEventos.getModel();
+       // dm.fireTableDataChanged(); 
+       jTableListarEventos.repaint();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,6 +264,7 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonAtualizar;
+    private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
