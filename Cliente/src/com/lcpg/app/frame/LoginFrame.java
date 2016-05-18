@@ -6,15 +6,22 @@ import com.lcpg.app.Service.ListenerSocket;
 import com.lcpg.app.bean.Mensagem;
 import java.net.Socket;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class LoginFrame extends javax.swing.JFrame {
-     private Socket socket;
+    private Socket socket;
     private Mensagem message;
     private ClienteService service;
     
     public LoginFrame() {
         initComponents();
         exibirStatusConexao();
+                  try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+            
     }
     
     private void exibirStatusConexao(){
@@ -128,7 +135,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addComponent(jLabel3)))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

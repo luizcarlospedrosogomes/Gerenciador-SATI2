@@ -18,7 +18,7 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
      */
     public JFrameCadastroEvento() {
         initComponents();
-    }
+        }
     public JFrameCadastroEvento(int idUsuario) {
         this.idUsuario = idUsuario;
         
@@ -56,14 +56,16 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarEventos = new javax.swing.JTable();
-        jButtonExcluir = new javax.swing.JButton();
-        jButtonEditar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jButtonAdicionar = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Eventos");
 
+        jTableListarEventos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTableListarEventos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableListarEventosMouseClicked(evt);
@@ -75,7 +77,7 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,9 +86,9 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButtonExcluir.setText("Excluir");
+        jLabel2.setText("Clique sobre o evento para excluir");
 
-        jButtonEditar.setText("Editar");
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButtonAdicionar.setText("Adicionar");
         jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,10 +97,42 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
             }
         });
 
+        jButtonAtualizar.setText("Adicionar");
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 475, Short.MAX_VALUE)
+                .addComponent(jButtonAtualizar)
+                .addGap(29, 29, 29)
+                .addComponent(jButtonAdicionar)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdicionar)
+                    .addComponent(jButtonAtualizar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,30 +140,23 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
                         .addGap(311, 311, 311)
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonEditar)
-                        .addGap(46, 46, 46)
-                        .addComponent(jButtonExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAdicionar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonExcluir)
-                    .addComponent(jButtonEditar))
-                .addGap(21, 21, 21))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAdicionar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -156,26 +183,30 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
         this.listener = new ListenerSocket();
         this.listener.tipoEnvento();
-        
+        //dispose();
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jTableListarEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarEventosMouseClicked
         String evento   = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 1).toString();
         String idEvento = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 0).toString();
         int res = JOptionPane.showConfirmDialog(null, "Gostaria de excluir "+ evento + " ?", "", JOptionPane.YES_NO_OPTION);
-             switch (res) {
-                 case JOptionPane.YES_OPTION:
-                     int p = jTableListarEventos.getSelectedRow();
-                     DefaultTableModel model = (DefaultTableModel) jTableListarEventos.getModel();
-                     model.removeRow(p);
-                     this.listener.excluirEvento(idEvento);
-                     JOptionPane.showMessageDialog(null, "Evento excluido");
-                     break;
-                 case JOptionPane.NO_OPTION:
-                     JOptionPane.showMessageDialog(null, "Cancelado");
-                     break;
-         }        
+        switch (res) {
+            case JOptionPane.YES_OPTION:
+            int p = jTableListarEventos.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTableListarEventos.getModel();
+            model.removeRow(p);
+            this.listener.excluirEvento(idEvento);
+            JOptionPane.showMessageDialog(null, "Evento excluido");
+            break;
+            case JOptionPane.NO_OPTION:
+            JOptionPane.showMessageDialog(null, "Cancelado");
+            break;
+        }
     }//GEN-LAST:event_jTableListarEventosMouseClicked
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,11 +245,12 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionar;
-    private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListarEventos;
     // End of variables declaration//GEN-END:variables

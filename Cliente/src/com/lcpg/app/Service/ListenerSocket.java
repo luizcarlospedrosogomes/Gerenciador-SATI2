@@ -125,7 +125,7 @@ public class ListenerSocket{
         JFrameCadastroEventoAdicionar jFrameCadastroEventoAdicionar = new JFrameCadastroEventoAdicionar();
         jFrameCadastroEventoAdicionar.preencherComboBox(message.getTipoEventoList());
         jFrameCadastroEventoAdicionar.setVisible(true);
-        fecharConexao();
+        //fecharConexao();
     }
 
     public void resEventoList(Mensagem message){

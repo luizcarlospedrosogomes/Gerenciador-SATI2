@@ -4,6 +4,7 @@ package com.lcpg.app.frame;
 import com.lcpg.app.Service.ListenerSocket;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 
 public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
     //private ListenerSocket listener;
@@ -165,7 +166,8 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
         if(!jTextFieldNome.getText().isEmpty() && !jTextFieldData1.getText().isEmpty()){
            ListenerSocket listener = new ListenerSocket();
            listener.cadastroEvento(jTextFieldNome.getText(), jTextFieldHoraIni.getText(), jTextFieldHoraFim.getText() ,idTipoEvento +1, jTextFieldData1.getText());
-       
+           JOptionPane.showMessageDialog(null, "Evento inserido com sucesso");
+          dispose();
        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
