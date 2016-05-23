@@ -79,12 +79,17 @@ import java.util.logging.Logger;
                     tipoEvento(message, output);
                 }else if(action.equals(Action.CADASTRO_EVENTO)){
                     cadastroEvento(message, output);
-                }else if(action.equals(Action.EVENTO_LIST)){
+                }else if(action.equals(Action.ALUNO_CADASTRAR)){
+                    cadastroAluno(message, output);
+                }else if(action.equals(Action.ALUNO_LIST)){
+                    alunoList(message, output);
+                }               
+                else if(action.equals(Action.EVENTO_LIST)){
                     eventoList(message, output);
                 }else if(action.equals(Action.EXCLUIR_EVENTO)){
                     excluirEvento(message, output);
-                }else if(action.equals(Action.USERS_ONLINE)){
-                    
+                }else if(action.equals(Action.ALUNO_EXCLUIR)){
+                     excluirAluno(message, output);
                 }
              }  
             } catch (IOException ex) {
@@ -132,6 +137,10 @@ import java.util.logging.Logger;
         sendOne(message, output);
        
     }
+    private void cadastroAluno(Mensagem message, ObjectOutputStream output){
+        Usuario usuario = new Usuario();
+        usuario.inserirAluno(message.getAlunoNome(), message.getAlunoRA(), message.getAlunoEmail(),  message.getAlunoTelefone(), message.getAlunoCurso(), message.getAlunoPeriodo());
+    }
     
     private void cadastroEvento(Mensagem message, ObjectOutputStream output){
         Evento evento = new Evento();
@@ -142,6 +151,17 @@ import java.util.logging.Logger;
     private void excluirEvento(Mensagem message, ObjectOutputStream output){
         Evento  evento = new Evento();
         if(evento.excluirEvento(message.getIdEvento())){
+            message.setResposta("200");
+        }else{
+            message.setResposta("501");
+        }
+        
+        sendOne(message, output);
+    }
+    
+     private void excluirAluno(Mensagem message, ObjectOutputStream output){
+        Usuario  usuario = new Usuario();
+        if(usuario.excluirAluno(message.getAlunoID())){
             message.setResposta("200");
         }else{
             message.setResposta("501");
@@ -170,6 +190,29 @@ import java.util.logging.Logger;
         }
         
         message.setListEvento(list);
+        sendOne(message, output);
+    }
+    
+    private void alunoList(Mensagem message, ObjectOutputStream output){
+        Usuario usuario = new Usuario();
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        this.res = usuario.usuarioList();
+        try {
+        ResultSetMetaData meta = this.res.getMetaData();
+        while (this.res.next()) {
+            Map map = new HashMap();
+            for (int i = 1; i <= meta.getColumnCount(); i++) {
+                String key = meta.getColumnName(i);
+                String value = res.getString(key);
+                map.put(key, value);
+            }
+            list.add(map);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        message.setListAluno(list);
         sendOne(message, output);
     }
     
