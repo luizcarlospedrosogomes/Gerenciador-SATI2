@@ -9,27 +9,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author usuario
  */
-public class JFrameCadastroEvento extends javax.swing.JFrame {
+public class JFrameEvento extends javax.swing.JFrame {
 
     private ListenerSocket listener;
     private int idUsuario;
     /**
      * Creates new form JFrameCadastroEvento
      */
-    public JFrameCadastroEvento() {
+    public JFrameEvento() {
         initComponents();
         }
-    public JFrameCadastroEvento(int idUsuario) {
+    public JFrameEvento(int idUsuario) {
         this.idUsuario = idUsuario;
-        
         initComponents();
-        System.out.println(this.idUsuario);
-        this.listener = new ListenerSocket();
-        this.listener.eventoList(this.idUsuario);
         preencherTable();
     }
     
     public void preencherTable(){
+        this.listener = new ListenerSocket();
+        this.listener.eventoList(this.idUsuario);
         DefaultTableModel model = (DefaultTableModel) jTableListarEventos.getModel();
         String[] columnNames = {"Numero", "Evento", "Data", "Hora inico", "Hora fim",  "Cadastrado por"};
         model.setColumnIdentifiers(columnNames);
@@ -216,9 +214,12 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableListarEventosMouseClicked
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-       // DefaultTableModel dm = (DefaultTableModel)jTableListarEventos.getModel();
-       // dm.fireTableDataChanged(); 
-       jTableListarEventos.repaint();
+        DefaultTableModel dm = (DefaultTableModel) jTableListarEventos.getModel();
+        int rowCount = dm.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        preencherTable();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -243,20 +244,21 @@ public class JFrameCadastroEvento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameCadastroEvento().setVisible(true);
+                new JFrameEvento().setVisible(true);
             }
         });
     }

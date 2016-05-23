@@ -8,18 +8,13 @@ package com.lcpg.app.Service;
 import com.lcpg.app.bean.Mensagem;
 import com.lcpg.app.bean.Mensagem.Action;
 import com.lcpg.app.frame.JFrameAdmin;
-import com.lcpg.app.frame.JFrameCadastroEvento;
-import com.lcpg.app.frame.JFrameCadastroEventoAdicionar;
+import com.lcpg.app.frame.JFrameEventocadastro;
+import com.lcpg.app.frame.JFramePrincipal;
 import com.lcpg.app.frame.LoginFrame;
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -27,7 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ListenerSocket{
-     private ObjectInputStream input;
+    private ObjectInputStream input;
     private ObjectOutputStream output;
     private Socket socket;
     private Mensagem message;
@@ -35,6 +30,7 @@ public class ListenerSocket{
     private String usuario;
     private String senha;
     public List<Map<String, String>> listEvento;// = new ArrayList<Map<String, String>>();
+    public List<Map<String, String>> listAluno;
     private GetConexao conexao; 
 
     public ListenerSocket() {
@@ -77,7 +73,21 @@ public class ListenerSocket{
         this.socket = this.service.connect();
         this.service.send(this.message);
     }
-
+    
+    public void cadastrarAluno(String nome, String RA, String email, String curso, String periodo, String telefone){
+        this.message = new Mensagem();
+        this.message.setAction(Action.ALUNO_CADASTRAR);
+        this.message.setAlunoNome(nome);
+        this.message.setAlunoRA(RA);
+        this.message.setAlunoEmail(email);
+        this.message.setAlunoCurso(curso);
+        this.message.setAlunoPeriodo(periodo);
+        this.message.setAlunoTelefone(telefone);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+    }
+    
     public void eventoList(int idUsuario) {
         this.message = new Mensagem();
         this.message.setAction(Action.EVENTO_LIST);
@@ -88,6 +98,15 @@ public class ListenerSocket{
         respostaServidor(this.socket);
     }
     
+     public void alunoList() {
+        this.message = new Mensagem();
+        this.message.setAction(Action.ALUNO_LIST);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+        respostaServidor(this.socket);
+    }
+      
     public void excluirEvento(String idEvento){
         this.message = new Mensagem();
         this.message.setAction(Action.EXCLUIR_EVENTO);
@@ -97,6 +116,17 @@ public class ListenerSocket{
         this.service.send(this.message);
         respostaServidor(this.socket);
     }
+    
+     public void excluirAluno(String idAluno){
+        this.message = new Mensagem();
+        this.message.setAction(Action.ALUNO_EXCLUIR);
+        this.message.setAlunoID(idAluno);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+       // respostaServidor(this.socket);
+    }
+    
     private void conectar(Mensagem message) {
         LoginFrame loginFrame = new LoginFrame();
         if (message.getTexto().equals("200_1")) {
@@ -109,8 +139,8 @@ public class ListenerSocket{
         } else if (message.getTexto().equals("200")) {
             JOptionPane.showMessageDialog(null, "Bem vindo ao sistema " + message.getNome() + " ID " + message.getIdUsuario());
             System.out.println(message.getIdUsuario());
-            JFrameCadastroEvento jFrameCadastroEvento = new JFrameCadastroEvento(message.getIdUsuario());
-            jFrameCadastroEvento.setVisible(true);
+            JFramePrincipal jJFramePrincipal = new JFramePrincipal(message.getNome(),message.getIdUsuario() );
+            jJFramePrincipal.setVisible(true);
             loginFrame.setVisible(false);
         } else if (message.getTexto().equals("403")) {
             JOptionPane.showMessageDialog(null, "Verifique sua conexao, usuario e senha. Não foi possivel conectar ao servidor.");
@@ -122,7 +152,7 @@ public class ListenerSocket{
     public void resTipoEvento(Mensagem message) {
         System.out.println(message.getTipoEventoList().values());
         System.out.println(message.getTipoEventoList().keySet());
-        JFrameCadastroEventoAdicionar jFrameCadastroEventoAdicionar = new JFrameCadastroEventoAdicionar();
+        JFrameEventocadastro jFrameCadastroEventoAdicionar = new JFrameEventocadastro();
         jFrameCadastroEventoAdicionar.preencherComboBox(message.getTipoEventoList());
         jFrameCadastroEventoAdicionar.setVisible(true);
         //fecharConexao();
@@ -132,7 +162,11 @@ public class ListenerSocket{
         this.listEvento =  message.getListEvento();
         fecharConexao();
     }
-
+     
+    public void resAlunoList(Mensagem message){
+        this.listAluno =  message.getListAluno();
+        fecharConexao();
+    }
     private void respostaServidor(Socket socket) {
 
         try {
@@ -147,12 +181,17 @@ public class ListenerSocket{
             if (action.equals(Mensagem.Action.CONNECT)) {
                 conectar(message);
             } else if (action.equals(Mensagem.Action.DISCONNECT)) {
-                // disconnect();
                 socket.close();
             } else if (action.equals(Mensagem.Action.TIPO_EVENTO)) {
                 resTipoEvento(message);
             } else if (action.equals(Mensagem.Action.EVENTO_LIST)) {
                 resEventoList(message);
+            } else if (action.equals(Mensagem.Action.ALUNO_CADASTRAR)) {
+                //resAlunoCadastro(message);
+            } else if (action.equals(Mensagem.Action.ALUNO_LIST)) {
+                resAlunoList(message);
+            }else if (action.equals(Mensagem.Action.ALUNO_EXCLUIR)) {
+                resAlunoList(message);
             }
         } catch (IOException ex) {
             System.out.println("erro " + ex);
@@ -196,6 +235,20 @@ public class ListenerSocket{
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    /**
+     * @return the listAluno
+     */
+    public List<Map<String, String>> getListAluno() {
+        return listAluno;
+    }
+
+    /**
+     * @param listAluno the listAluno to set
+     */
+    public void setListAluno(List<Map<String, String>> listAluno) {
+        this.listAluno = listAluno;
     }
 
 }

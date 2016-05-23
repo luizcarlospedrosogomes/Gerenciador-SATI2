@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 
-public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
+public class JFrameEventocadastro extends javax.swing.JFrame {
     //private ListenerSocket listener;
     //private HashMap<Integer, String> tipoEventoList;
    
     
-    public JFrameCadastroEventoAdicionar() {
+    public JFrameEventocadastro() {
         initComponents();
         }
     
@@ -37,12 +37,12 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldHoraIni = new javax.swing.JTextField();
-        jTextFieldData1 = new javax.swing.JTextField();
-        jTextFieldHoraFim = new javax.swing.JTextField();
         jComboBoxTipo = new javax.swing.JComboBox<>();
         jButtonCadastrar = new javax.swing.JButton();
         jButtonCancelar1 = new javax.swing.JButton();
+        jTextFieldHoraIni = new javax.swing.JFormattedTextField();
+        jTextFieldHoraFim = new javax.swing.JFormattedTextField();
+        jTextFieldData1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,15 +58,6 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
 
         jLabel6.setText("Tipo");
 
-        jTextFieldHoraIni.setText("00:00");
-
-        jTextFieldHoraFim.setText("00:00");
-        jTextFieldHoraFim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHoraFimActionPerformed(evt);
-            }
-        });
-
         jButtonCadastrar.setText("Cadastrar");
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +66,15 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
         });
 
         jButtonCancelar1.setText("Cancelar");
+
+        jTextFieldHoraIni.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        jTextFieldHoraIni.setText("00:00");
+
+        jTextFieldHoraFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        jTextFieldHoraFim.setText("00:00");
+
+        jTextFieldData1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jTextFieldData1.setText("//");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,19 +93,21 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNome)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldHoraFim)
+                                    .addComponent(jTextFieldHoraIni, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldData1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextFieldHoraFim, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldHoraIni, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jTextFieldData1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(75, 75, 75))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 56, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar1)
                         .addGap(51, 51, 51)
                         .addComponent(jButtonCadastrar)))
@@ -154,8 +156,8 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,10 +172,6 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
           dispose();
        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
-
-    private void jTextFieldHoraFimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHoraFimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHoraFimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,20 +190,21 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEventoAdicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEventocadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEventoAdicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEventocadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEventoAdicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEventocadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastroEventoAdicionar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameEventocadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameCadastroEventoAdicionar().setVisible(true);
+                new JFrameEventocadastro().setVisible(true);
             }
         });
     }
@@ -221,9 +220,9 @@ public class JFrameCadastroEventoAdicionar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldData1;
-    private javax.swing.JTextField jTextFieldHoraFim;
-    private javax.swing.JTextField jTextFieldHoraIni;
+    private javax.swing.JFormattedTextField jTextFieldData1;
+    private javax.swing.JFormattedTextField jTextFieldHoraFim;
+    private javax.swing.JFormattedTextField jTextFieldHoraIni;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 }

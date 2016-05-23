@@ -20,7 +20,15 @@ public class Mensagem implements Serializable{
     private String idEvento;
     private String resposta;
     private int    idUsuario;
+    private String alunoNome;
+    private String alunoID;
+    private String alunoTelefone;
+    private String alunoCurso;
+    private String alunoEmail;
+    private String alunoPeriodo;
+    private String alunoRA;
     private HashMap<String, String> tipoEventoList = new HashMap<String, String>();
+    private List<Map<String, String>> listAluno = new ArrayList<Map<String, String>>();
     private List<Map<String, String>> listEvento = new ArrayList<Map<String, String>>();
     private Set<String> setOnline = new HashSet<String>();
 
@@ -245,8 +253,120 @@ public class Mensagem implements Serializable{
         this.resposta = resposta;
     }
 
+    /**
+     * @return the alunoNome
+     */
+    public String getAlunoNome() {
+        return alunoNome;
+    }
+
+    /**
+     * @param alunoNome the alunoNome to set
+     */
+    public void setAlunoNome(String alunoNome) {
+        this.alunoNome = alunoNome;
+    }
+
+    /**
+     * @return the alunoID
+     */
+    public String getAlunoID() {
+        return alunoID;
+    }
+
+    /**
+     * @param alunoID the alunoID to set
+     */
+    public void setAlunoID(String alunoID) {
+        this.alunoID = alunoID;
+    }
+
+    /**
+     * @return the alunoTelefone
+     */
+    public String getAlunoTelefone() {
+        return alunoTelefone;
+    }
+
+    /**
+     * @param alunoTelefone the alunoTelefone to set
+     */
+    public void setAlunoTelefone(String alunoTelefone) {
+        this.alunoTelefone = alunoTelefone;
+    }
+
+    /**
+     * @return the alunoCurso
+     */
+    public String getAlunoCurso() {
+        return alunoCurso;
+    }
+
+    /**
+     * @param alunoCurso the alunoCurso to set
+     */
+    public void setAlunoCurso(String alunoCurso) {
+        this.alunoCurso = alunoCurso;
+    }
+
+    /**
+     * @return the alunoEmail
+     */
+    public String getAlunoEmail() {
+        return alunoEmail;
+    }
+
+    /**
+     * @param alunoEmail the alunoEmail to set
+     */
+    public void setAlunoEmail(String alunoEmail) {
+        this.alunoEmail = alunoEmail;
+    }
+
+    /**
+     * @return the alunoPeriodo
+     */
+    public String getAlunoPeriodo() {
+        return alunoPeriodo;
+    }
+
+    /**
+     * @param alunoPeriodo the alunoPeriodo to set
+     */
+    public void setAlunoPeriodo(String alunoPeriodo) {
+        this.alunoPeriodo = alunoPeriodo;
+    }
+
+    /**
+     * @return the alunoRA
+     */
+    public String getAlunoRA() {
+        return alunoRA;
+    }
+
+    /**
+     * @param alunoRA the alunoRA to set
+     */
+    public void setAlunoRA(String alunoRA) {
+        this.alunoRA = alunoRA;
+    }
+
+    /**
+     * @return the listAluno
+     */
+    public List<Map<String, String>> getListAluno() {
+        return listAluno;
+    }
+
+    /**
+     * @param listAluno the listAluno to set
+     */
+    public void setListAluno(List<Map<String, String>> listAluno) {
+        this.listAluno = listAluno;
+    }
+
     public enum Action{
-        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO, EVENTO_LIST, EXCLUIR_EVENTO
+        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO, EVENTO_LIST, EXCLUIR_EVENTO, ALUNO_LIST, ALUNO_CADASTRAR, ALUNO_EXCLUIR
     }
             
 }
