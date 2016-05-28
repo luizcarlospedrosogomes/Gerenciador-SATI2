@@ -55,6 +55,26 @@ public class Usuario {
         }
     }
     
+    public void atualizarAluno(String idAluno,String nome, String RA, String email, String telefone, String curso, String periodo){
+        String sql = "update usuario set nome = ?, ra = ?, curso = ?, periodo = ?, email = ?, telefone = ?" +
+            		"where id = ?";
+        try {
+            
+            pst = this.con.prepareStatement(sql);
+            pst.setString(1, nome);
+            pst.setString(2, RA);
+            pst.setString(3, curso);
+            pst.setInt(4, Integer.parseInt(periodo));
+            pst.setString(5, email);
+            pst.setString(6, telefone);
+            pst.setInt(7, Integer.parseInt(idAluno));
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Evento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public ResultSet usuarioList(){
         String sql = "select id\n" +
                      "     , nome\n" +

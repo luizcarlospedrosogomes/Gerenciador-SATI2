@@ -83,7 +83,11 @@ import java.util.logging.Logger;
                     cadastroAluno(message, output);
                 }else if(action.equals(Action.ALUNO_LIST)){
                     alunoList(message, output);
-                }               
+                }
+                else if(action.equals(Action.ALUNO_UPDATE)){
+                    alunoAtualizar(message, output);
+                    System.out.println("aluno update");
+                }
                 else if(action.equals(Action.EVENTO_LIST)){
                     eventoList(message, output);
                 }else if(action.equals(Action.EXCLUIR_EVENTO)){
@@ -137,11 +141,17 @@ import java.util.logging.Logger;
         sendOne(message, output);
        
     }
+    
     private void cadastroAluno(Mensagem message, ObjectOutputStream output){
         Usuario usuario = new Usuario();
         usuario.inserirAluno(message.getAlunoNome(), message.getAlunoRA(), message.getAlunoEmail(),  message.getAlunoTelefone(), message.getAlunoCurso(), message.getAlunoPeriodo());
     }
     
+      private void alunoAtualizar(Mensagem message, ObjectOutputStream output){
+        Usuario usuario = new Usuario();
+        usuario.atualizarAluno(message.getAlunoID(), message.getAlunoNome(), message.getAlunoRA(), message.getAlunoEmail(),  message.getAlunoTelefone(), message.getAlunoCurso(), message.getAlunoPeriodo());
+    }
+      
     private void cadastroEvento(Mensagem message, ObjectOutputStream output){
         Evento evento = new Evento();
         evento.inserirEvento(message.getNomeEvento(), message.getHoraInicioEvento(), message.getHoraFimEvento(), message.getTipoEvento(), message.getIdUsuario(), message.getDataEvento());
