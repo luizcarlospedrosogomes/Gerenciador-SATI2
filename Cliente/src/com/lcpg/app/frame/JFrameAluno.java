@@ -52,7 +52,16 @@ public class JFrameAluno extends javax.swing.JFrame {
             model.addRow(row);           
         }
     }
-    
+    /*
+    public static void atualizarTable(){
+        DefaultTableModel dm = (DefaultTableModel) jTableAluno.getModel();
+        int rowCount = dm.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        preencherTable();
+    }
+    */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -164,7 +173,7 @@ public class JFrameAluno extends javax.swing.JFrame {
         JFrameAlunoCadastro jFrameAlunoCadastro = new JFrameAlunoCadastro();
         jFrameAlunoCadastro.setVisible(true);
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
-
+    
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         DefaultTableModel dm = (DefaultTableModel) jTableAluno.getModel();
         int rowCount = dm.getRowCount();
@@ -214,8 +223,17 @@ public class JFrameAluno extends javax.swing.JFrame {
         
         edit.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(edit, "Editando");
+            public void actionPerformed(ActionEvent e){     
+                /*{"Numero", "Nome", "R.A.", "Email", "Telefone",  "Curso", "Periodo"};*/
+                String idAluno  = jTableAluno.getValueAt(jTableAluno.getSelectedRow(), 0).toString();
+                String nome     = jTableAluno.getValueAt(jTableAluno.getSelectedRow(), 1).toString();
+                String RA       = jTableAluno.getValueAt(jTableAluno.getSelectedRow(), 2).toString();
+                String email    = jTableAluno.getValueAt(jTableAluno.getSelectedRow(), 3).toString();
+                String telefone = jTableAluno.getValueAt(jTableAluno.getSelectedRow(), 4).toString();
+                String curso    = jTableAluno.getValueAt(jTableAluno.getSelectedRow(), 5).toString();
+                String periodo  = jTableAluno.getValueAt(jTableAluno.getSelectedRow(), 6).toString();
+                JFrameAlunoCadastro jFrameAlunoCadastro = new JFrameAlunoCadastro(idAluno, nome, RA, email, telefone, periodo, curso);
+                jFrameAlunoCadastro.setVisible(true);
             }
         });
         

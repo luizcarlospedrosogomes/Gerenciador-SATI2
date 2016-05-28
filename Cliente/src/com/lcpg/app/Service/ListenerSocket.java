@@ -88,6 +88,21 @@ public class ListenerSocket{
         this.service.send(this.message);
     }
     
+      public void atualizarAluno(String idAluno, String nome, String RA, String email, String curso, String periodo, String telefone){
+        this.message = new Mensagem();
+        this.message.setAction(Action.ALUNO_UPDATE);
+        this.message.setAlunoID(idAluno);
+        this.message.setAlunoNome(nome);
+        this.message.setAlunoRA(RA);
+        this.message.setAlunoEmail(email);
+        this.message.setAlunoCurso(curso);
+        this.message.setAlunoPeriodo(periodo);
+        this.message.setAlunoTelefone(telefone);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+    }
+    
     public void eventoList(int idUsuario) {
         this.message = new Mensagem();
         this.message.setAction(Action.EVENTO_LIST);
