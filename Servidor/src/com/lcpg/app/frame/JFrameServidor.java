@@ -28,7 +28,7 @@ public class JFrameServidor extends javax.swing.JFrame {
 
         jLabel2.setText("Porta:");
 
-        jTextFieldPorta.setText("5000");
+        jTextFieldPorta.setText("5050");
         jTextFieldPorta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPortaActionPerformed(evt);
