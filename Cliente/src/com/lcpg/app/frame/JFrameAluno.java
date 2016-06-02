@@ -217,7 +217,7 @@ public class JFrameAluno extends javax.swing.JFrame {
        ListenerSocket listener = new ListenerSocket();
         JPopupMenu popup       = new JPopupMenu();
         JMenuItem edit         = new JMenuItem("Editar Aluno");       
-        JMenuItem delete       = new JMenuItem("Exluir aluno");
+        JMenuItem delete       = new JMenuItem("Exluir Aluno");
         popup.add(edit);
         popup.add(delete);
         

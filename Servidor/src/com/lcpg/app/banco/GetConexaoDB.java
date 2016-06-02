@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.lcpg.app.Service;
+
+package com.lcpg.app.banco;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +14,7 @@ public class GetConexaoDB {
     private Properties prop;
     private FileInputStream file;  
     private String IP;
-    private int porta;
+    private String porta;
     private String usuario;
     private String banco;
     private String senha;
@@ -36,8 +30,12 @@ public class GetConexaoDB {
         try {
             this.file = new FileInputStream("./src/properties/dados.properties"); 
             this.prop.load(this.file);
-            setIP(prop.getProperty("prop.server.host"));
-            setPorta(Integer.parseInt(prop.getProperty("prop.server.porta")));
+            setIP(prop.getProperty("prop.server.ip"));
+            setPorta(prop.getProperty("prop.server.porta"));
+            setBanco(prop.getProperty("prop.server.banco"));
+            setUsuario(prop.getProperty("prop.server.usuario"));
+            setSenha(prop.getProperty("prop.server.senha"));
+            
         } catch (FileNotFoundException ex) {
             
         } catch (IOException ex) {
@@ -64,14 +62,14 @@ public class GetConexaoDB {
     /**
      * @return the porta
      */
-    public int getPorta() {
+    public String getPorta() {
         return porta;
     }
 
     /**
      * @param porta the porta to set
      */
-    public void setPorta(int porta) {
+    public void setPorta(String porta) {
         this.porta = porta;
     }
 

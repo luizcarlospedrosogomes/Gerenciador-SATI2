@@ -1,8 +1,15 @@
 package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ListenerSocket;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Map;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,8 +51,63 @@ public class JFrameEvento extends javax.swing.JFrame {
             
        }
         }
+    /*
     
+     private void jTableListarEventosMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        jTableListarEventos.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseReleased(MouseEvent e) 
+        {
+            int r = jTableListarEventos.rowAtPoint(e.getPoint());
+            if (r >= 0 && r < jTableListarEventos.getRowCount()) {
+                jTableListarEventos.setRowSelectionInterval(r, r);
+            } else {
+                jTableListarEventos.clearSelection();
+            }
+            int rowindex = jTableListarEventos.getSelectedRow();
+            if (rowindex < 0)
+                return;
+            if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+                JPopupMenu popup = createYourPopUp(rowindex,jTableListarEventos);
+                popup.show(e.getComponent(), e.getX(), e.getY());
+            }
+        }
+            
+    });
+    }                                        
+    */
     
+    public static JPopupMenu createYourPopUp(int rowindex, JTable jTableListarEventos)
+    {
+       ListenerSocket listener = new ListenerSocket();
+        JPopupMenu popup       = new JPopupMenu();
+        //JMenuItem edit         = new JMenuItem("Editar Evento");       
+        JMenuItem delete       = new JMenuItem("Exluir Evento");
+        //popup.add(edit);
+        popup.add(delete);
+        
+        delete.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String evento   = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 1).toString();
+        String idEvento = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 0).toString();
+        int res = JOptionPane.showConfirmDialog(null, "Gostaria de excluir "+ evento + " ?", "", JOptionPane.YES_NO_OPTION);
+        switch (res) {
+                    case JOptionPane.YES_OPTION:
+                    int p = jTableListarEventos.getSelectedRow();
+                    DefaultTableModel model = (DefaultTableModel) jTableListarEventos.getModel();
+                    model.removeRow(p);
+                    listener.excluirEvento(idEvento);
+                    JOptionPane.showMessageDialog(null, "Evento excluido");
+                    break;
+                    case JOptionPane.NO_OPTION:
+                    JOptionPane.showMessageDialog(null, "Cancelado");
+                    break;
+                }
+            }
+        });
+        return popup;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -56,7 +118,6 @@ public class JFrameEvento extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListarEventos = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButtonAdicionar = new javax.swing.JButton();
         jButtonAtualizar = new javax.swing.JButton();
@@ -64,7 +125,7 @@ public class JFrameEvento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Eventos");
+        jLabel1.setText("EVENTOS CADASTRADOS");
 
         jTableListarEventos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTableListarEventos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,8 +147,6 @@ public class JFrameEvento extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jLabel2.setText("Clique sobre o evento para excluir");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -140,30 +199,23 @@ public class JFrameEvento extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(311, 311, 311)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(269, 269, 269)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -194,25 +246,9 @@ public class JFrameEvento extends javax.swing.JFrame {
         this.listener.tipoEnvento();
         //dispose();
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
-
-    private void jTableListarEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarEventosMouseClicked
-        String evento   = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 1).toString();
-        String idEvento = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 0).toString();
-        int res = JOptionPane.showConfirmDialog(null, "Gostaria de excluir "+ evento + " ?", "", JOptionPane.YES_NO_OPTION);
-        switch (res) {
-            case JOptionPane.YES_OPTION:
-            int p = jTableListarEventos.getSelectedRow();
-            DefaultTableModel model = (DefaultTableModel) jTableListarEventos.getModel();
-            model.removeRow(p);
-            this.listener.excluirEvento(idEvento);
-            JOptionPane.showMessageDialog(null, "Evento excluido");
-            break;
-            case JOptionPane.NO_OPTION:
-            JOptionPane.showMessageDialog(null, "Cancelado");
-            break;
-        }
-    }//GEN-LAST:event_jTableListarEventosMouseClicked
-
+    
+    
+    
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         DefaultTableModel dm = (DefaultTableModel) jTableListarEventos.getModel();
         int rowCount = dm.getRowCount();
@@ -226,6 +262,29 @@ public class JFrameEvento extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jTableListarEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListarEventosMouseClicked
+        jTableListarEventos.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseReleased(MouseEvent e) 
+        {
+            int r = jTableListarEventos.rowAtPoint(e.getPoint());
+            if (r >= 0 && r < jTableListarEventos.getRowCount()) {
+                jTableListarEventos.setRowSelectionInterval(r, r);
+            } else {
+                jTableListarEventos.clearSelection();
+            }
+            int rowindex = jTableListarEventos.getSelectedRow();
+            if (rowindex < 0)
+                return;
+            if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+                JPopupMenu popup = createYourPopUp(rowindex,jTableListarEventos);
+                popup.show(e.getComponent(), e.getX(), e.getY());
+            }
+        }
+            
+    });
+    }//GEN-LAST:event_jTableListarEventosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -268,7 +327,6 @@ public class JFrameEvento extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

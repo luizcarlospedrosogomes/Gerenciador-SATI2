@@ -8,18 +8,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conexao {
-    private String url = "jdbc:postgresql://192.168.70.101:5432/distribuido";  
-    private String usuario = "postgres";  
-    private String senha = "admin";  
-    private Connection con;  
+    private String url;// = "jdbc:postgresql://192.168.70.101:5432/distribuido";  
+    private String usuario;// = "postgres";  
+    private String senha;// = "admin";  
+    private String banco;
+    private Connection con; 
+    private GetConexaoDB conexao;
+   
     public Conexao(){
+        this.conexao = new GetConexaoDB();
+        this.banco   = conexao.getBanco();
+        this.usuario = conexao.getUsuario();
+        this.senha   = conexao.getSenha();
+        this.url     = "jdbc:postgresql://"+conexao.getIP()+":"+conexao.getPorta()+"/"+this.banco;
+        System.out.println(url);
         conectar();        
     }
         
     public Connection conectar(){
         try {  
             Class.forName("org.postgresql.Driver");
-            this.con = DriverManager.getConnection(url, usuario, senha);  
+            this.con = DriverManager.getConnection(this.url, this.usuario, this.senha);  
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);

@@ -1,0 +1,20 @@
+SERVIDOR
+  porta pode ser escolhida acima de 5001, por padrão roda na 5050
+  base de dados postgres
+	os criterios de conexao ao banco devem ser definidos no arquivo dados_conexao_banco
+    nome do banco: distribuido
+    
+    
+CLIENTE
+  por padrao busca o servidor na porta 5050 no ip 127.0.0.1
+  para alterar é necessario modificar o arquivo ip_porta_servidor_para_conexao
+      prop.server.host = 127.0.0.1
+      prop.server.porta = 5050
+      
+  usuario: usuario
+  senha  : 123456
+
+
+git hub https://github.com/luizcarlospedrosogomes/Gerenciador-SATI2/tree/add_evento	  
+
+  

@@ -8,6 +8,7 @@ package com.lcpg.app.frame;
     
 public class JFramePrincipal extends javax.swing.JFrame {
 
+    public static String idUsuario;
     
     public JFramePrincipal() {
         initComponents();
@@ -17,6 +18,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         initComponents();
         jLabelUsuario.setText(usuario);
         jLabelUsuarioID.setText(Integer.toString(usuarioID));
+        idUsuario = Integer.toString(usuarioID);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

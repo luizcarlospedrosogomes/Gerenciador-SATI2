@@ -60,7 +60,7 @@ public class ListenerSocket{
         System.out.println("respota servidor");
     }
 
-    public void cadastroEvento(String nomeEvento, String horaIni, String horaFim, int tipoEvento, String dataEvento) {
+    public void cadastroEvento(String IdUsuario,String nomeEvento, String horaIni, String horaFim, int tipoEvento, String dataEvento) {
         this.message = new Mensagem();
         this.message.setAction(Action.CADASTRO_EVENTO);
         this.message.setNomeEvento(nomeEvento);
@@ -68,7 +68,7 @@ public class ListenerSocket{
         this.message.setHoraInicioEvento(horaIni);
         this.message.setHoraFimEvento(horaFim);
         this.message.setTipoEvento(tipoEvento);
-        this.message.setIdUsuario(3);
+        this.message.setIdUsuario(Integer.parseInt(IdUsuario));
         this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
         this.socket = this.service.connect();
         this.service.send(this.message);
