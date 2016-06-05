@@ -30,6 +30,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jLabelConectadoComo = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
         jLabelUsuarioID = new javax.swing.JLabel();
+        jButtonPresenca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,27 +56,39 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jLabelUsuarioID.setText("jLabel2");
 
+        jButtonPresenca.setText("Presença");
+        jButtonPresenca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPresencaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel1)
-                .addContainerGap(67, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonCadastroAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelConectadoComo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelUsuarioID)
-                        .addGap(13, 13, 13))))
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonCadastroAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jButtonPresenca, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(67, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(20, 20, 20)
@@ -87,9 +100,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(54, 54, 54)
+                .addGap(51, 51, 51)
                 .addComponent(jButtonCadastroAluno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jButtonPresenca)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelConectadoComo)
                     .addComponent(jLabelUsuario)
@@ -99,7 +114,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(94, 94, 94)
                     .addComponent(jButtonCadastroEvento)
-                    .addContainerGap(73, Short.MAX_VALUE)))
+                    .addContainerGap(102, Short.MAX_VALUE)))
         );
 
         pack();
@@ -114,6 +129,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         JFrameEvento jFrameEvento = new JFrameEvento(Integer.parseInt(jLabelUsuarioID.getText()));
         jFrameEvento.setVisible(true);
     }//GEN-LAST:event_jButtonCadastroEventoActionPerformed
+
+    private void jButtonPresencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPresencaActionPerformed
+        JFramePresenca jFramePresenca = new JFramePresenca(Integer.parseInt(jLabelUsuarioID.getText()));
+        jFramePresenca.setVisible(true);
+    }//GEN-LAST:event_jButtonPresencaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +173,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastroAluno;
     private javax.swing.JButton jButtonCadastroEvento;
+    private javax.swing.JButton jButtonPresenca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelConectadoComo;
     private javax.swing.JLabel jLabelUsuario;

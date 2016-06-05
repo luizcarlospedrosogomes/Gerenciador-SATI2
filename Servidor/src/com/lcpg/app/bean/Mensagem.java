@@ -27,6 +27,8 @@ public class Mensagem implements Serializable{
     private String idEvento;
     private String resposta;
     private int    idUsuario;
+    private int    controlepresencaEvento;
+    private int    idPresencaEvento;
     private String alunoNome;
     private String alunoID;
     private String alunoTelefone;
@@ -36,6 +38,7 @@ public class Mensagem implements Serializable{
     private String alunoRA;
     private List<Map<String, String>> listEvento = new ArrayList<Map<String, String>>();
     private List<Map<String, String>> listAluno = new ArrayList<Map<String, String>>();
+    private List<Map<String, String>> listEventoPresenca = new ArrayList<Map<String, String>>();
     private HashMap<String, String> tipoEventoList = new HashMap<String, String>();
 
     /**
@@ -373,8 +376,50 @@ public class Mensagem implements Serializable{
     public void setListAluno(List<Map<String, String>> listAluno) {
         this.listAluno = listAluno;
     }
+
+    /**
+     * @return the listEventoPresenca
+     */
+    public List<Map<String, String>> getListEventoPresenca() {
+        return listEventoPresenca;
+    }
+
+    /**
+     * @param listEventoPresenca the listEventoPresenca to set
+     */
+    public void setListEventoPresenca(List<Map<String, String>> listEventoPresenca) {
+        this.listEventoPresenca = listEventoPresenca;
+    }
+
+    /**
+     * @return the controlepresencaEvento
+     */
+    public int getControlepresencaEvento() {
+        return controlepresencaEvento;
+    }
+
+    /**
+     * @param controlepresencaEvento the controlepresencaEvento to set
+     */
+    public void setControlepresencaEvento(int controlepresencaEvento) {
+        this.controlepresencaEvento = controlepresencaEvento;
+    }
+
+    /**
+     * @return the idPresencaEvento
+     */
+    public int getIdPresencaEvento() {
+        return idPresencaEvento;
+    }
+
+    /**
+     * @param idPresencaEvento the idPresencaEvento to set
+     */
+    public void setIdPresencaEvento(int idPresencaEvento) {
+        this.idPresencaEvento = idPresencaEvento;
+    }
     public enum Action{
-        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO, EVENTO_LIST, EXCLUIR_EVENTO, ALUNO_LIST, ALUNO_CADASTRAR, ALUNO_EXCLUIR, ALUNO_UPDATE
+        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO, EVENTO_LIST, EXCLUIR_EVENTO, ALUNO_LIST, ALUNO_CADASTRAR, ALUNO_EXCLUIR, ALUNO_UPDATE, LIST_EVENTO_PRESENCA, PRESENCA_EVENTO_UPDATE
     }
             
 }

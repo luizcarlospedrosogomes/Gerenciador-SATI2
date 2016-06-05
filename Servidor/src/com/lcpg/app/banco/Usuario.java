@@ -56,8 +56,12 @@ public class Usuario {
     }
     
     public void atualizarAluno(String idAluno,String nome, String RA, String email, String telefone, String curso, String periodo){
-        String sql = "update usuario set nome = ?, ra = ?, curso = ?, periodo = ?, email = ?, telefone = ?" +
-            		"where id = ?";
+        String sql = "update usuario set nome = ?"
+                + " , ra = ?, curso = ?"
+                + " , periodo = ?"
+                + " , email = ?"
+                + " , telefone = ?" +
+            	  " where id = ?";
         try {
             
             pst = this.con.prepareStatement(sql);

@@ -50,32 +50,7 @@ public class JFrameEvento extends javax.swing.JFrame {
             model.addRow(row);
             
        }
-        }
-    /*
-    
-     private void jTableListarEventosMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        jTableListarEventos.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseReleased(MouseEvent e) 
-        {
-            int r = jTableListarEventos.rowAtPoint(e.getPoint());
-            if (r >= 0 && r < jTableListarEventos.getRowCount()) {
-                jTableListarEventos.setRowSelectionInterval(r, r);
-            } else {
-                jTableListarEventos.clearSelection();
-            }
-            int rowindex = jTableListarEventos.getSelectedRow();
-            if (rowindex < 0)
-                return;
-            if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
-                JPopupMenu popup = createYourPopUp(rowindex,jTableListarEventos);
-                popup.show(e.getComponent(), e.getX(), e.getY());
-            }
-        }
-            
-    });
-    }                                        
-    */
+    }
     
     public static JPopupMenu createYourPopUp(int rowindex, JTable jTableListarEventos)
     {

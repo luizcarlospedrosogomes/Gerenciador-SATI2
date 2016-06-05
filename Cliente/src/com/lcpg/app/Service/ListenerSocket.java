@@ -10,6 +10,7 @@ import com.lcpg.app.bean.Mensagem.Action;
 import com.lcpg.app.frame.JFrameAdmin;
 import com.lcpg.app.frame.JFrameEventocadastro;
 import com.lcpg.app.frame.JFramePrincipal;
+import static com.lcpg.app.frame.JFramePrincipal.idUsuario;
 import com.lcpg.app.frame.LoginFrame;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,6 +30,7 @@ public class ListenerSocket{
     private ClienteService service;
     private String usuario;
     private String senha;
+    public List<Map<String, String>> listaEventoPresenca;// = new ArrayList<Map<String, String>>();
     public List<Map<String, String>> listEvento;// = new ArrayList<Map<String, String>>();
     public List<Map<String, String>> listAluno;
     private GetConexao conexao; 
@@ -103,10 +105,32 @@ public class ListenerSocket{
         this.service.send(this.message);
     }
     
+    public void controlarEvento(String idPresencaEvento, String idEvento, String IdusuarioControle, int controle){
+        this.message = new Mensagem();
+        this.message.setAction(Action.PRESENCA_EVENTO_UPDATE);
+        this.message.setControlepresencaEvento(Integer.parseInt(idPresencaEvento));
+        this.message.setAlunoID(IdusuarioControle);
+        this.message.setIdEvento(idEvento);     
+        this.message.setControlepresencaEvento(controle);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+    }
+            
+            
     public void eventoList(int idUsuario) {
         this.message = new Mensagem();
         this.message.setAction(Action.EVENTO_LIST);
         this.message.setIdUsuario(idUsuario);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+        respostaServidor(this.socket);
+    }
+    
+    public void listEventoPresenca() {
+        this.message = new Mensagem();
+        this.message.setAction(Action.LIST_EVENTO_PRESENCA);
         this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
         this.socket = this.service.connect();
         this.service.send(this.message);
@@ -172,7 +196,12 @@ public class ListenerSocket{
         jFrameCadastroEventoAdicionar.setVisible(true);
         //fecharConexao();
     }
-
+        
+    public void resListEventoPresenca(Mensagem message){
+        this.listaEventoPresenca =  message.getListEventoPresenca();
+        fecharConexao();
+    }
+    
     public void resEventoList(Mensagem message){
         this.listEvento =  message.getListEvento();
         fecharConexao();
@@ -207,6 +236,8 @@ public class ListenerSocket{
                 resAlunoList(message);
             }else if (action.equals(Mensagem.Action.ALUNO_EXCLUIR)) {
                 resAlunoList(message);
+            }else if (action.equals(Mensagem.Action.LIST_EVENTO_PRESENCA)) {
+                resListEventoPresenca(message);
             }
         } catch (IOException ex) {
             System.out.println("erro " + ex);
@@ -265,5 +296,7 @@ public class ListenerSocket{
     public void setListAluno(List<Map<String, String>> listAluno) {
         this.listAluno = listAluno;
     }
+
+  
 
 }

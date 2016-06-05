@@ -6,9 +6,12 @@
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/Servidor.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/banco/Usuario.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/service/ServidorService.java</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/banco/Presenca.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/banco/Conexao.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/properties/dados.properties</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/banco/Evento.java</file>
             <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/banco/GetConexaoDB.java</file>
+            <file>file:/C:/Users/usuario/OneDrive/docS/UTFPR/5%20-%20PERIODO/SISTEMAS%20DISTRIBUIDOS/Gerenciador-SATI2/Servidor/src/com/lcpg/app/bean/Mensagem.java</file>
         </group>
     </open-files>
 </project-private>

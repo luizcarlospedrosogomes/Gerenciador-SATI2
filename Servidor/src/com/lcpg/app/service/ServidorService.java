@@ -6,6 +6,7 @@
 package com.lcpg.app.service;
 
 import com.lcpg.app.banco.Evento;
+import com.lcpg.app.banco.Presenca;
 import com.lcpg.app.banco.Usuario;
 import com.lcpg.app.bean.Mensagem;
 import com.lcpg.app.bean.Mensagem.Action;
@@ -94,6 +95,11 @@ import java.util.logging.Logger;
                     excluirEvento(message, output);
                 }else if(action.equals(Action.ALUNO_EXCLUIR)){
                      excluirAluno(message, output);
+                } else if(action.equals(Action.LIST_EVENTO_PRESENCA)){
+                     listEventoPresenca(message, output);
+                } else if(action.equals(Action.PRESENCA_EVENTO_UPDATE)){
+                    atualizarPresencaEvento(message, output);
+                    
                 }
              }  
             } catch (IOException ex) {
@@ -140,6 +146,12 @@ import java.util.logging.Logger;
         message.setTipoEventoList(hmap);
         sendOne(message, output);
        
+    }
+    
+     private void atualizarPresencaEvento(Mensagem message, ObjectOutputStream output){
+        Presenca presenca = new Presenca();
+        presenca.atualizaPresencaEvento(message.getIdEvento(), message.getAlunoID(), message.getControlepresencaEvento());
+        
     }
     
     private void cadastroAluno(Mensagem message, ObjectOutputStream output){
@@ -200,6 +212,29 @@ import java.util.logging.Logger;
         }
         
         message.setListEvento(list);
+        sendOne(message, output);
+    }
+    
+    private void listEventoPresenca(Mensagem message, ObjectOutputStream output){
+        Presenca presenca = new Presenca();
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        this.res = presenca.listarEventoPresenca();
+        try {
+        ResultSetMetaData meta = this.res.getMetaData();
+        while (this.res.next()) {
+            Map map = new HashMap();
+            for (int i = 1; i <= meta.getColumnCount(); i++) {
+                String key = meta.getColumnName(i);
+                String value = res.getString(key);
+                map.put(key, value);
+            }
+            list.add(map);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        message.setListEventoPresenca(list);
         sendOne(message, output);
     }
     
