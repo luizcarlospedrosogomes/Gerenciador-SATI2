@@ -20,19 +20,19 @@ public class Conexao {
         this.banco   = conexao.getBanco();
         this.usuario = conexao.getUsuario();
         this.senha   = conexao.getSenha();
-        this.url     = "jdbc:postgresql://"+conexao.getIP()+":"+conexao.getPorta()+"/"+this.banco;
+        this.url     = "jdbc:mysql://"+conexao.getIP()+"/"+this.banco;
         System.out.println(url);
         conectar();        
     }
         
-    public Connection conectar(){
+    public Connection conectar() {
         try {  
-            Class.forName("org.postgresql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             this.con = DriverManager.getConnection(this.url, this.usuario, this.senha);  
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return con;

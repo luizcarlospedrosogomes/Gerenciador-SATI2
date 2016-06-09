@@ -69,10 +69,9 @@ import java.util.logging.Logger;
              Mensagem message = null;
             try {
                 while((message = (Mensagem) input.readObject()) != null){
-                Action action = message.getAction();
-                
+                Action action = message.getAction();                
                 if(action.equals(Action.CONNECT)){
-                   conect(message, output);
+                    conect(message, output);
                 }else if(action.equals(Action.DISCONNECT)){
                     disconnect(message, output);
                     return;
@@ -84,12 +83,9 @@ import java.util.logging.Logger;
                     cadastroAluno(message, output);
                 }else if(action.equals(Action.ALUNO_LIST)){
                     alunoList(message, output);
-                }
-                else if(action.equals(Action.ALUNO_UPDATE)){
+                }else if(action.equals(Action.ALUNO_UPDATE)){
                     alunoAtualizar(message, output);
-                    System.out.println("aluno update");
-                }
-                else if(action.equals(Action.EVENTO_LIST)){
+                }else if(action.equals(Action.EVENTO_LIST)){
                     eventoList(message, output);
                 }else if(action.equals(Action.EXCLUIR_EVENTO)){
                     excluirEvento(message, output);
@@ -99,7 +95,8 @@ import java.util.logging.Logger;
                      listEventoPresenca(message, output);
                 } else if(action.equals(Action.PRESENCA_EVENTO_UPDATE)){
                     atualizarPresencaEvento(message, output);
-                    
+                } else if(action.equals(Action.GET_ALUNO_RA)){
+                    getAlunoRA(message, output);    
                 }
              }  
             } catch (IOException ex) {
@@ -129,6 +126,27 @@ import java.util.logging.Logger;
         }
         sendOne(message, output);
     }
+    
+    
+    private void getAlunoRA(Mensagem message, ObjectOutputStream output){
+        message.setAction(Action.GET_ALUNO_RA);
+        Usuario usuario = new Usuario();
+        this.res = usuario.getUsuarioRA(message.getAlunoRA());
+        try {
+            if(res.next()){
+              message.setAlunoNome(res.getString(1));
+              message.setAlunoEmail(res.getString(2));
+              message.setAlunoCurso(res.getString(3));
+              message.setResposta("200");
+            }else
+              message.setResposta("404");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sendOne(message, output);
+    }
+    
     
     private void tipoEvento(Mensagem message, ObjectOutputStream output){
         message.setAction(Action.TIPO_EVENTO);

@@ -33,6 +33,7 @@ public class ListenerSocket{
     public List<Map<String, String>> listaEventoPresenca;// = new ArrayList<Map<String, String>>();
     public List<Map<String, String>> listEvento;// = new ArrayList<Map<String, String>>();
     public List<Map<String, String>> listAluno;
+    public String [] dadosAluno;
     private GetConexao conexao; 
 
     public ListenerSocket() {
@@ -128,6 +129,16 @@ public class ListenerSocket{
         respostaServidor(this.socket);
     }
     
+    public void getAlunoRA(String RA) {
+        this.message = new Mensagem();
+        this.message.setAction(Action.GET_ALUNO_RA);
+        this.message.setAlunoRA(RA);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+        respostaServidor(this.socket);
+    }
+    
     public void listEventoPresenca() {
         this.message = new Mensagem();
         this.message.setAction(Action.LIST_EVENTO_PRESENCA);
@@ -194,7 +205,21 @@ public class ListenerSocket{
         JFrameEventocadastro jFrameCadastroEventoAdicionar = new JFrameEventocadastro();
         jFrameCadastroEventoAdicionar.preencherComboBox(message.getTipoEventoList());
         jFrameCadastroEventoAdicionar.setVisible(true);
-        //fecharConexao();
+        fecharConexao();
+    }
+    
+    public String [] resGetAlunoRA(Mensagem message){
+        System.out.println(message.getAlunoNome());
+      //  if(message.getResposta().equals("200")){
+//            this.dadosAluno[1] = message.getResposta();
+//            this.dadosAluno[2] = message.getAlunoEmail();
+ //           this.dadosAluno[3] = message.getAlunoCurso();
+            this.dadosAluno[4] =  message.getAlunoNome();
+       // }else{
+           // dadosAluno[0] = message.getResposta();
+       // } 
+        return dadosAluno;
+    
     }
         
     public void resListEventoPresenca(Mensagem message){
@@ -238,6 +263,8 @@ public class ListenerSocket{
                 resAlunoList(message);
             }else if (action.equals(Mensagem.Action.LIST_EVENTO_PRESENCA)) {
                 resListEventoPresenca(message);
+            }else if (action.equals(Mensagem.Action.GET_ALUNO_RA)) {
+                resGetAlunoRA(message);
             }
         } catch (IOException ex) {
             System.out.println("erro " + ex);

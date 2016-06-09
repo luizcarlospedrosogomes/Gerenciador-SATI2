@@ -73,7 +73,7 @@ public class JFramePresenca extends javax.swing.JFrame {
                     DefaultTableModel model = (DefaultTableModel) jTableListarEventos.getModel();
                     model.removeRow(p);
                     listener.controlarEvento(idPresencaEvento, idEvento, JFramePrincipal.idUsuario, 1);
-                    JFramePresencaAluno jFramePresencaAluno = new JFramePresencaAluno();
+                    JFramePresencaAluno jFramePresencaAluno = new JFramePresencaAluno(evento, idEvento, JFramePrincipal.idUsuario );
                     jFramePresencaAluno.setVisible(true);
                     break;
                     case JOptionPane.NO_OPTION:

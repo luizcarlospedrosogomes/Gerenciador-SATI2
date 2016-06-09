@@ -22,7 +22,12 @@ public class Usuario {
     }
     
     public ResultSet consultaLogin(String nome, String senha){
-       String sql = "select id, nome, senha from usuario where nome = ? and senha = ? limit 1" ;
+       String sql = "select id"
+               + " , nome"
+               + " , senha "
+               + " from usuario "
+               + " where nome = ? and senha = ? "
+               + " limit 1" ;
        System.out.println("nome "+nome +" senha "+senha);
        try {
             this.pst = con.prepareStatement(sql);
@@ -113,4 +118,21 @@ public class Usuario {
         return true;
     }
     
+    
+    public ResultSet getUsuarioRA( String RA){
+        String sql = "select nome"
+                + " , email"
+                + " , curso ||' - ' ||periodo as turma "
+                + " from usuario "
+                + " where RA ='"+RA+"'";
+                
+        try {
+            System.out.println(sql);
+            this.pst = con.prepareStatement(sql);
+            this.result = this.pst.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.result;
+    }
 }
