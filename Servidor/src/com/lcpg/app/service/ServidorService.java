@@ -216,11 +216,14 @@ import java.util.logging.Logger;
         this.res = evento.eventoList(message.getIdUsuario());
         try {
         ResultSetMetaData meta = this.res.getMetaData();
+        //    System.out.println(meta.getColumnName(1));
         while (this.res.next()) {
             Map map = new HashMap();
             for (int i = 1; i <= meta.getColumnCount(); i++) {
-                String key = meta.getColumnName(i);
+                
+                String key = meta.getColumnLabel(i);
                 String value = res.getString(key);
+             //   System.out.println(key +" - "+ value);
                 map.put(key, value);
             }
             list.add(map);
@@ -228,7 +231,7 @@ import java.util.logging.Logger;
         } catch (SQLException ex) {
             Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        System.out.println(list);
         message.setListEvento(list);
         sendOne(message, output);
     }
@@ -242,7 +245,7 @@ import java.util.logging.Logger;
         while (this.res.next()) {
             Map map = new HashMap();
             for (int i = 1; i <= meta.getColumnCount(); i++) {
-                String key = meta.getColumnName(i);
+                String key = meta.getColumnLabel(i);
                 String value = res.getString(key);
                 map.put(key, value);
             }
@@ -265,7 +268,7 @@ import java.util.logging.Logger;
         while (this.res.next()) {
             Map map = new HashMap();
             for (int i = 1; i <= meta.getColumnCount(); i++) {
-                String key = meta.getColumnName(i);
+                String key = meta.getColumnLabel(i);
                 String value = res.getString(key);
                 map.put(key, value);
             }

@@ -33,7 +33,7 @@ public class ListenerSocket{
     public List<Map<String, String>> listaEventoPresenca;// = new ArrayList<Map<String, String>>();
     public List<Map<String, String>> listEvento;// = new ArrayList<Map<String, String>>();
     public List<Map<String, String>> listAluno;
-    public String [] dadosAluno;
+    public String [] dadosAluno = new String[4];
     private GetConexao conexao; 
 
     public ListenerSocket() {
@@ -200,26 +200,21 @@ public class ListenerSocket{
     }
 
     public void resTipoEvento(Mensagem message) {
-        System.out.println(message.getTipoEventoList().values());
-        System.out.println(message.getTipoEventoList().keySet());
         JFrameEventocadastro jFrameCadastroEventoAdicionar = new JFrameEventocadastro();
         jFrameCadastroEventoAdicionar.preencherComboBox(message.getTipoEventoList());
         jFrameCadastroEventoAdicionar.setVisible(true);
         fecharConexao();
     }
     
-    public String [] resGetAlunoRA(Mensagem message){
-        System.out.println(message.getAlunoNome());
-      //  if(message.getResposta().equals("200")){
-//            this.dadosAluno[1] = message.getResposta();
-//            this.dadosAluno[2] = message.getAlunoEmail();
- //           this.dadosAluno[3] = message.getAlunoCurso();
-            this.dadosAluno[4] =  message.getAlunoNome();
-       // }else{
-           // dadosAluno[0] = message.getResposta();
-       // } 
-        return dadosAluno;
-    
+    public  void resGetAlunoRA(Mensagem message){
+       if(message.getResposta().equals("200")){
+            this.dadosAluno[0] = message.getAlunoNome();
+            this.dadosAluno[1] = message.getAlunoEmail();
+            this.dadosAluno[2] = message.getAlunoCurso();
+            this.dadosAluno[3] = message.getResposta();
+        }else{
+            this.dadosAluno[3] = message.getResposta();
+        } 
     }
         
     public void resListEventoPresenca(Mensagem message){

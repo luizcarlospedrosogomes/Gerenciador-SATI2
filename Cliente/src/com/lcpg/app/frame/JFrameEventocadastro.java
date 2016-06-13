@@ -2,8 +2,14 @@
 package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ListenerSocket;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class JFrameEventocadastro extends javax.swing.JFrame {
@@ -17,14 +23,14 @@ public class JFrameEventocadastro extends javax.swing.JFrame {
         }
     
      public void preencherComboBox(HashMap<String, String> tipoEventoList){
-         System.out.println("retornado valor em frame adicioanr");
-         System.out.println(tipoEventoList.values());
-         System.out.println(tipoEventoList.keySet());
-         Iterator it = tipoEventoList.keySet().iterator();        
-         while(it.hasNext())
-        {
-            jComboBoxTipo.addItem(tipoEventoList.get(it.next()));
-        }
+        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jComboBoxTipo.getModel();
+        comboModel.removeAllElements();
+        List<TipoEventoCombobox> tipoEvento= new ArrayList<TipoEventoCombobox>();
+         for(Map.Entry<String, String> kv : tipoEventoList.entrySet()){
+             
+            TipoEventoCombobox  tTipoEventoCombobox = new TipoEventoCombobox(kv.getKey(), kv.getValue());
+            comboModel.addElement(tTipoEventoCombobox);
+        }     
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -69,6 +75,11 @@ public class JFrameEventocadastro extends javax.swing.JFrame {
         });
 
         jButtonCancelar1.setText("Cancelar");
+        jButtonCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelar1ActionPerformed(evt);
+            }
+        });
 
         jTextFieldHoraIni.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         jTextFieldHoraIni.setText("00:00");
@@ -179,14 +190,19 @@ public class JFrameEventocadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
  
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        int idTipoEvento = jComboBoxTipo.getSelectedIndex();
+        TipoEventoCombobox  tTipoEventoCombobox = (TipoEventoCombobox)jComboBoxTipo.getSelectedItem();
+        int idTipoEvento =  tTipoEventoCombobox.getCodigo();
         if(!jTextFieldNome.getText().isEmpty() && !jTextFieldData1.getText().isEmpty()){
            ListenerSocket listener = new ListenerSocket();
-           listener.cadastroEvento(JFramePrincipal.idUsuario, jTextFieldNome.getText(), jTextFieldHoraIni.getText(), jTextFieldHoraFim.getText() ,idTipoEvento +1, jTextFieldData1.getText());
+           listener.cadastroEvento(JFramePrincipal.idUsuario, jTextFieldNome.getText(), jTextFieldHoraIni.getText(), jTextFieldHoraFim.getText() ,idTipoEvento, jTextFieldData1.getText());
            JOptionPane.showMessageDialog(null, "Evento inserido com sucesso");
           dispose();
        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    private void jButtonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,6 +239,8 @@ public class JFrameEventocadastro extends javax.swing.JFrame {
             }
         });
     }
+   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
@@ -242,4 +260,36 @@ public class JFrameEventocadastro extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTextFieldHoraIni;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
+}
+class TipoEventoCombobox {
+ 
+    private int codigo;
+    private String nome;
+
+    TipoEventoCombobox(String key, String value) {
+      this.codigo = Integer.parseInt(key);
+      this.nome   = value;
+    }
+ 
+    public int getCodigo() {
+        return codigo;
+    }
+ 
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+ 
+    public String getNome() {
+        return nome;
+    }
+ 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+ 
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+ 
 }

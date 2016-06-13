@@ -78,7 +78,7 @@ public class Usuario {
             pst.setString(6, telefone);
             pst.setInt(7, Integer.parseInt(idAluno));
             pst.executeUpdate();
-            
+            System.out.println(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Evento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,7 +94,7 @@ public class Usuario {
                      "     , telefone\n" +
                      "     , ra \n" +
                      "  from usuario \n" +
-                     " where id > 3";
+                     " where id > 2";
                 
         try {
             this.pst = con.prepareStatement(sql);

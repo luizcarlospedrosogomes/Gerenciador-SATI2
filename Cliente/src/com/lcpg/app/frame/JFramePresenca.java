@@ -62,18 +62,19 @@ public class JFramePresenca extends javax.swing.JFrame {
         controle.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String evento   = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 2).toString();
+                String eventoNome   = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 2).toString();
                 String idEvento   = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 1).toString();
                 String idPresencaEvento = jTableListarEventos.getValueAt(jTableListarEventos.getSelectedRow(), 0).toString();
                
-                int res = JOptionPane.showConfirmDialog(null, "Gostaria de controlar "+ evento + " ?", "", JOptionPane.YES_NO_OPTION);
+                int res = JOptionPane.showConfirmDialog(null, "Gostaria de controlar "+ eventoNome + " ?", "", JOptionPane.YES_NO_OPTION);
                 switch (res) {
                     case JOptionPane.YES_OPTION:
                     int p = jTableListarEventos.getSelectedRow();
                     DefaultTableModel model = (DefaultTableModel) jTableListarEventos.getModel();
                     model.removeRow(p);
                     listener.controlarEvento(idPresencaEvento, idEvento, JFramePrincipal.idUsuario, 1);
-                    JFramePresencaAluno jFramePresencaAluno = new JFramePresencaAluno(evento, idEvento, JFramePrincipal.idUsuario );
+                    //    System.out.println("evento "+evento+" idEvento"+idEvento);
+                    JFramePresencaAluno jFramePresencaAluno = new JFramePresencaAluno(eventoNome, idEvento, JFramePrincipal.idUsuario );
                     jFramePresencaAluno.setVisible(true);
                     break;
                     case JOptionPane.NO_OPTION:

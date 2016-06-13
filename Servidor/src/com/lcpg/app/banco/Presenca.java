@@ -58,6 +58,7 @@ public class Presenca {
     
     
     public void atualizaPresencaEvento(String idEvento, String idUsuarioControle, int statusControle){
+        System.out.println("idevento "+ idEvento+"- idUsuarioControle "+idUsuarioControle+" -statusControle "+statusControle);
      String sql = "update presenca_evento"
                 + "  set id_usuario_controle = ?"
                 + " , controlado = ? "

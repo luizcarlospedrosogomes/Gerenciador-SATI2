@@ -13,8 +13,8 @@ public class JFramePresencaAluno extends javax.swing.JFrame {
         initComponents();
     }
     
-    public JFramePresencaAluno(String evento, String idPresencaEvento, String idUsuario) {
-        this.evento           = evento;
+    public JFramePresencaAluno(String eventoNome, String idEvento, String idUsuario) {
+        this.evento           = eventoNome;
         this.idEvento         = idEvento;
         this.idUsuario        = idUsuario;
         initComponents();
@@ -213,6 +213,7 @@ public class JFramePresencaAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        System.out.println("idevnto " +this.idEvento);
         ListenerSocket listener = new ListenerSocket();
         listener.controlarEvento("0", this.idEvento, this.idUsuario, 0);
         dispose();
@@ -225,8 +226,17 @@ public class JFramePresencaAluno extends javax.swing.JFrame {
     private void jFormattedTextFieldRAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldRAFocusLost
         ListenerSocket listener = new ListenerSocket();
         listener.getAlunoRA(jFormattedTextFieldRA.getText());
-        String [] dadosAluno = listener.dadosAluno;
-        System.out.println(dadosAluno);
+        String [] dadosAluno = new String[4];
+        dadosAluno = listener.dadosAluno;
+        if(dadosAluno[3].equals("200")){
+            jTextFieldNomeAluno.setText(dadosAluno[0]);
+            jTextFieldEmail.setText(dadosAluno[1]);
+            jTextFieldTurma.setText(dadosAluno[2]);
+            //jListAlunosPresentes.add
+        }else{
+            jTextFieldNomeAluno.setText("Aluno não cadastrado");
+        }
+       
     }//GEN-LAST:event_jFormattedTextFieldRAFocusLost
 
     /**

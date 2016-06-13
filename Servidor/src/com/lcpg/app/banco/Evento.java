@@ -61,26 +61,28 @@ public class Evento {
     }
     
     public ResultSet eventoList(int idUsuario){
+        System.out.println("id usuario >> "+idUsuario);
         String sql = "select  e.id"
                 + "         , e.nome"
                 + "         , e.data_ini"
                 + "         , e.data_fim"
                 + "         , e.data"
-                + "         , u.nome as usuario "
-                + "      from evento e\n" +
-                      " inner join tipo_evento te\n" +
-                        " on te.id = e.tipo_evento_id\n" +
-                       " inner join usuario u\n" +
-                          " on u.id = e.usuario_id"+
-                       " where u.id = ?";
+                + "         , u.nome as usuario_n "
+                + "      from evento e " +
+                      " inner join tipo_evento te" +
+                        " on te.id = e.tipo_evento_id" +
+                       " inner join usuario u" +
+                          " on u.id = e.usuario_id";
                 
         try {
+           // System.out.println(sql);
             this.pst = con.prepareStatement(sql);
-            pst.setInt(1, 3);
+//            pst.setInt(1, 3);
             this.result = this.pst.executeQuery();
-        } catch (SQLException ex) {
-            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+            Logger.getLogger(Evento.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
         return this.result;
     }
     

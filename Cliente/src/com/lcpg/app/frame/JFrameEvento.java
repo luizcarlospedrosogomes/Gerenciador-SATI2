@@ -39,14 +39,15 @@ public class JFrameEvento extends javax.swing.JFrame {
         String[] columnNames = {"Numero", "Evento", "Data", "Hora inico", "Hora fim",  "Cadastrado por"};
         model.setColumnIdentifiers(columnNames);
         Object[] row = new Object[6];
+        System.out.println(this.listener.listEvento);
         for (Map<String, String> map : this.listener.listEvento) {
             Object [] dados = map.values().toArray();
             row[0] = dados[5];
-            row[1] = dados[3];
+            row[1] = dados[4];
             row[2] = dados[1];
             row[3] = dados[2];
             row[4] = dados[0];
-            row[5] = dados[4];
+            row[5] = dados[3];
             model.addRow(row);
             
        }

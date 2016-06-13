@@ -89,7 +89,7 @@ public class JFrameAlunoCadastro extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jTextFieldRA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jTextFieldRA.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jLabelEmail.setText("jLabel6");
 
