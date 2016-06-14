@@ -38,7 +38,7 @@ public class ListenerSocket{
 
     public ListenerSocket() {
         this.conexao = new GetConexao();
-        
+        this.conexao.getIPPorta();
     }
 
     public void conectaServidor() {

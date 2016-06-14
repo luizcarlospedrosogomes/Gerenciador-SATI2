@@ -42,6 +42,9 @@ public class LoginFrame extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jLabelServidor = new javax.swing.JLabel();
         jTextFieldSenha = new javax.swing.JPasswordField();
+        jTextFieldIP = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldPorta = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,6 +77,17 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldIP.setText("127.0.0.1");
+        jTextFieldIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIPActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Porta");
+
+        jTextFieldPorta.setText("5050");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,7 +101,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonSair)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonConectar))
                     .addComponent(jTextFieldUsario)
                     .addComponent(jTextFieldSenha))
@@ -97,7 +111,13 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addComponent(jLabelErro)
                 .addGap(56, 56, 56))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabelServidor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextFieldPorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +132,11 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelServidor)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelServidor)
+                    .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldPorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConectar)
@@ -144,15 +168,17 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConectarActionPerformed
+        GetConexao getConexao = new GetConexao();
         String usuario = jTextFieldUsario.getText();
         String senha   = jTextFieldSenha.getText();
+        getConexao.setIPPOrta(jTextFieldIP.getText(), jTextFieldPorta.getText());
         if(!usuario.isEmpty() && !senha.isEmpty()){
             ListenerSocket listener = new ListenerSocket();
             listener.setUsuario(usuario);
@@ -172,6 +198,10 @@ public class LoginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSenhaActionPerformed
 
+    private void jTextFieldIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIPActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -180,9 +210,12 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelErro;
     private javax.swing.JLabel jLabelServidor;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextFieldIP;
+    private javax.swing.JTextField jTextFieldPorta;
     private javax.swing.JPasswordField jTextFieldSenha;
     private javax.swing.JTextField jTextFieldUsario;
     // End of variables declaration//GEN-END:variables

@@ -2,6 +2,8 @@
 package com.lcpg.app.frame;
 
 import com.lcpg.app.Service.ListenerSocket;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 public class JFramePresencaAluno extends javax.swing.JFrame {
 
@@ -73,11 +75,6 @@ public class JFramePresencaAluno extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Alunos presentes"));
 
-        jListAlunosPresentes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jListAlunosPresentes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -220,7 +217,9 @@ public class JFramePresencaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonConfirmaPresencaAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmaPresencaAlunoActionPerformed
-        // TODO add your handling code here:
+        DefaultListModel model = (DefaultListModel) jListAlunosPresentes.getModel();
+        model.addElement(jTextFieldNomeAluno.getText());
+         //  jListAlunosPresentes = new JList(listModel);
     }//GEN-LAST:event_jButtonConfirmaPresencaAlunoActionPerformed
 
     private void jFormattedTextFieldRAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldRAFocusLost
@@ -231,8 +230,7 @@ public class JFramePresencaAluno extends javax.swing.JFrame {
         if(dadosAluno[3].equals("200")){
             jTextFieldNomeAluno.setText(dadosAluno[0]);
             jTextFieldEmail.setText(dadosAluno[1]);
-            jTextFieldTurma.setText(dadosAluno[2]);
-            //jListAlunosPresentes.add
+            jTextFieldTurma.setText(dadosAluno[2]);           
         }else{
             jTextFieldNomeAluno.setText("Aluno não cadastrado");
         }
