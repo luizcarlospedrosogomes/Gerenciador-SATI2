@@ -20,10 +20,12 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -36,6 +38,8 @@ import java.util.logging.Logger;
     private Socket       socket;
     private Map<String, ObjectOutputStream> mapOnlines = new  HashMap<String, ObjectOutputStream>();
     private ResultSet res;
+    private ArrayList<String> presencaAuno = new ArrayList<>();
+    Map<Integer, String> prevencaAlunoEvento = new HashMap<Integer, String>();
     
     public ServidorService(int porta){
       
@@ -97,6 +101,8 @@ import java.util.logging.Logger;
                     atualizarPresencaEvento(message, output);
                 } else if(action.equals(Action.GET_ALUNO_RA)){
                     getAlunoRA(message, output);    
+               } else if(action.equals(Action.GET_PRESENCA_ALUNO_RA)){
+                    getPresencaAlunoRA(message, output);    
                 }
              }  
             } catch (IOException ex) {
@@ -104,6 +110,19 @@ import java.util.logging.Logger;
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    private void getPresencaAlunoRA(Mensagem message, ObjectOutputStream output){
+        if(!this.prevencaAlunoEvento.containsValue(message.getAlunoRA())){
+            this.prevencaAlunoEvento.put(Integer.parseInt(message.getIdEvento()),message.getAlunoRA());
+            Presenca presenca = new Presenca();
+            presenca.setPresencaAluno(message.getAlunoRA(), message.getIdEvento());
+            System.out.println("Confirmando presenca");
+            System.out.println( this.prevencaAlunoEvento);
+         }else{
+            System.out.println( this.prevencaAlunoEvento);
+            System.out.println("Aluno nao foi inserido no banco . pq esta presente na lista");
         }
     }
     
@@ -130,19 +149,24 @@ import java.util.logging.Logger;
     
     private void getAlunoRA(Mensagem message, ObjectOutputStream output){
         message.setAction(Action.GET_ALUNO_RA);
-        Usuario usuario = new Usuario();
-        this.res = usuario.getUsuarioRA(message.getAlunoRA());
-        try {
-            if(res.next()){
-              message.setAlunoNome(res.getString(1));
-              message.setAlunoEmail(res.getString(2));
-              message.setAlunoCurso(res.getString(3));
-              message.setResposta("200");
-            }else
-              message.setResposta("404");
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+         if(!this.prevencaAlunoEvento.containsValue(message.getAlunoRA())){
+            Usuario usuario = new Usuario();
+            this.res = usuario.getUsuarioRA(message.getAlunoRA());
+            try {
+                if(res.next()){
+                  message.setAlunoNome(res.getString(1));
+                  message.setAlunoEmail(res.getString(2));
+                  message.setAlunoCurso(res.getString(3));
+                  message.setResposta("200");
+                }else
+                  message.setResposta("404");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+              System.out.println("Aluno ja presente em um evento");
+              message.setResposta("201_1");
         }
         sendOne(message, output);
     }
@@ -167,9 +191,18 @@ import java.util.logging.Logger;
     }
     
      private void atualizarPresencaEvento(Mensagem message, ObjectOutputStream output){
+        
         Presenca presenca = new Presenca();
         presenca.atualizaPresencaEvento(message.getIdEvento(), message.getAlunoID(), message.getControlepresencaEvento());
+       
+        System.out.println("encerrar evento >> antes de remover");
+        System.out.println(this.prevencaAlunoEvento);
+        System.out.println("idevento "+message.getIdEvento());
+         
+        this.prevencaAlunoEvento.remove(Integer.parseInt(message.getIdEvento()));
         
+        System.out.println("encerrar evento >> depois de remover");
+        System.out.println(this.prevencaAlunoEvento);
     }
     
     private void cadastroAluno(Mensagem message, ObjectOutputStream output){

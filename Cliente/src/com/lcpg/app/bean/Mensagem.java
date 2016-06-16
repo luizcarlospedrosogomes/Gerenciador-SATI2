@@ -32,6 +32,7 @@ public class Mensagem implements Serializable{
     private HashMap<String, String> tipoEventoList = new HashMap<String, String>();
     private List<Map<String, String>> listAluno = new ArrayList<Map<String, String>>();
     private List<Map<String, String>> listEventoPresenca = new ArrayList<Map<String, String>>();
+    private List<Map<String, String>> listEventoPresencaAluno = new ArrayList<Map<String,String>>();
     private List<Map<String, String>> listEvento = new ArrayList<Map<String, String>>();
     private Set<String> setOnline = new HashSet<String>();
 
@@ -410,8 +411,22 @@ public class Mensagem implements Serializable{
         this.idPresencaEvento = idPresencaEvento;
     }
 
+    /**
+     * @return the listEventoPresencaAluno
+     */
+    public List<Map<String, String>> getListEventoPresencaAluno() {
+        return listEventoPresencaAluno;
+    }
+
+    /**
+     * @param listEventoPresencaAluno the listEventoPresencaAluno to set
+     */
+    public void setListEventoPresencaAluno(List<Map<String, String>> listEventoPresencaAluno) {
+        this.listEventoPresencaAluno = listEventoPresencaAluno;
+    }
+
     public enum Action{
-        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO, EVENTO_LIST, EXCLUIR_EVENTO, ALUNO_LIST, ALUNO_CADASTRAR, ALUNO_EXCLUIR, ALUNO_UPDATE, LIST_EVENTO_PRESENCA,PRESENCA_EVENTO_UPDATE, GET_ALUNO_RA
+        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE, CADASTRO_EVENTO, TIPO_EVENTO, EVENTO_LIST, EXCLUIR_EVENTO, ALUNO_LIST, ALUNO_CADASTRAR, ALUNO_EXCLUIR, ALUNO_UPDATE, LIST_EVENTO_PRESENCA,PRESENCA_EVENTO_UPDATE, GET_ALUNO_RA, GET_PRESENCA_ALUNO_RA
     }
             
 }

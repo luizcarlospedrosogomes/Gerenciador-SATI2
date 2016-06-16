@@ -17,7 +17,14 @@ public class JFrameAlunoCadastro extends javax.swing.JFrame {
         initComponents();
         jLabelID.setVisible(false);
     }
-
+    
+    public JFrameAlunoCadastro(String RA){
+        initComponents();
+        jLabelOperacao.setText("CADASTRO");
+        jTextFieldRA.setText(RA);
+        jButtonCadastrar.setText("Cadastrar");
+    }
+    
     public JFrameAlunoCadastro(String id, String nome, String RA, String email, String telefone, String periodo, String curso) {
         initComponents();
         jLabelID.setText(id);

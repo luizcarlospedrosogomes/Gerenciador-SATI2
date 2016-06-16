@@ -75,6 +75,22 @@ public class Presenca {
         } catch (SQLException ex) {
             Logger.getLogger(Evento.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
     
+    public void setPresencaAluno(String idAluno, String idEvento){
+        String sql;
+        sql = "insert into presenca_usuario"
+                + " (id_usuario, id_evento) "
+                + " values(?,?)";
+        try {
+            
+            pst = this.con.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(idAluno));
+            pst.setInt(2, Integer.parseInt(idEvento));
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Evento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -167,7 +167,7 @@ public class ListenerSocket{
         respostaServidor(this.socket);
     }
     
-     public void excluirAluno(String idAluno){
+    public void excluirAluno(String idAluno){
         this.message = new Mensagem();
         this.message.setAction(Action.ALUNO_EXCLUIR);
         this.message.setAlunoID(idAluno);
@@ -177,6 +177,15 @@ public class ListenerSocket{
        // respostaServidor(this.socket);
     }
     
+    public void setPresencaAlunoRA(String RA,String evento){
+        this.message = new Mensagem();
+        this.message.setAction(Action.GET_PRESENCA_ALUNO_RA);
+        this.message.setAlunoRA(RA);
+        this.message.setIdEvento(evento);
+        this.service = new ClienteService(this.conexao.getIP(), this.conexao.getPorta());
+        this.socket = this.service.connect();
+        this.service.send(this.message);
+    }
     private void conectar(Mensagem message) {
         LoginFrame loginFrame = new LoginFrame();
         if (message.getTexto().equals("200_1")) {
@@ -231,6 +240,9 @@ public class ListenerSocket{
         this.listAluno =  message.getListAluno();
         fecharConexao();
     }
+    
+  
+    
     private void respostaServidor(Socket socket) {
 
         try {
